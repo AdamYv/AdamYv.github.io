@@ -1,0 +1,536 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CV://ADAM_PARIS - IT Quantitative Analyst</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=Roboto+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --bg-color: #0d1117;
+            --panel-bg: #161b22;
+            --text-color: #c9d1d9;
+            --primary-accent: #39ff14; /* Neon Green */
+            --secondary-accent: #00c2c7; /* Cyan */
+            --header-color: #58a6ff; /* Blue */
+            --border-color: #30363d;
+            --font-family-mono: 'Fira Code', 'Roboto Mono', monospace;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        html {
+            font-size: 10pt;
+            background-color: var(--bg-color);
+        }
+
+        body {
+            font-family: var(--font-family-mono);
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* A4 Page Layout */
+        .container {
+            display: flex;
+            width: 240mm;
+            min-height: 297mm;
+            margin: 2rem 0;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 25px rgba(0, 255, 20, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Terminal Scanline Effect */
+        .container::after {
+            content: ' ';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            animation: scanline 10s linear infinite;
+        }
+
+        /* --- Main Structure: Sidebar & Main Content --- */
+        .sidebar {
+            width: 35%;
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-right: 1px dashed var(--border-color);
+            z-index: 1;
+        }
+
+        .main-content {
+            width: 65%;
+            padding: 1.5rem;
+            z-index: 1;
+        }
+
+        /* --- General Typography & Elements --- */
+        h1, h2, h3 {
+            font-family: var(--font-family-mono);
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: var(--secondary-accent);
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        a:hover {
+            color: var(--primary-accent);
+            text-shadow: 0 0 5px var(--primary-accent);
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        /* --- Section Styling --- */
+        .section {
+            margin-bottom: 1.75rem;
+        }
+
+        .section-title {
+            color: var(--header-color);
+            font-size: 1.2em;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '>>';
+            color: var(--primary-accent);
+            margin-right: 0.5em;
+            font-weight: 700;
+        }
+
+        /* --- Sidebar Specifics --- */
+        .contact-info .section-title::before { content: 'ID'; }
+        .skills .section-title::before { content: 'PKG'; }
+        .languages .section-title::before { content: 'LANG'; }
+        .interests .section-title::before { content: 'CONF'; }
+        .mission .section-title::before { content: 'TASK'; }
+
+        .contact-info ul li {
+            margin-bottom: 0.4rem;
+            word-wrap: break-word;
+        }
+
+        .contact-info strong {
+            color: var(--secondary-accent);
+            display: inline-block;
+            width: 70px;
+        }
+
+        .skill-category {
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-category h3 {
+            color: var(--secondary-accent);
+            font-size: 1em;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .skill-category p {
+            margin: 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .mission-box {
+            border: 1px solid var(--border-color);
+            padding: 0.8rem;
+            margin-top: 1rem;
+            background: rgba(0,0,0,0.2);
+        }
+        .mission-box p { margin: 0.2rem 0; }
+        .mission-box strong { color: var(--primary-accent); }
+
+        /* --- Main Content Specifics --- */
+        .main-header {
+            text-align: left;
+            margin-bottom: 2rem;
+            text-align: left;
+            padding-top: 0; /* Ajouté pour supprimer l'espace en haut */
+        }
+
+        .main-header h1 {
+            font-size: 2.5em;
+            color: var(--primary-accent);
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
+            margin: 0; /* Déjà présent mais confirmé */
+            line-height: 1; /* Ajouté pour réduire l'espace vertical */
+            padding: 0;
+        }
+        
+
+        .main-header .prompt {
+            color: var(--header-color);
+        }
+
+        .main-header .prompt span {
+            color: var(--text-color);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 0.6em;
+            height: 1.2em;
+            background-color: var(--primary-accent);
+            animation: blink 1s step-end infinite;
+            vertical-align: bottom;
+            margin-left: 0.2em;
+        }
+
+        .summary p {
+            margin: 0;
+            font-style: italic;
+            color: #aab3be; /* Slightly dimmer text for summary */
+        }
+        .summary .section-title::before { content: 'INIT'; }
+
+        .education .section-title::before { content: 'LOG'; }
+        .education-entry {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .education-entry .date {
+            color: var(--secondary-accent);
+            font-size: 0.9em;
+        }
+        .education-entry .degree {
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .education-entry .institution {
+            font-style: italic;
+            color: #aab3be;
+        }
+
+        .projects .section-title::before { content: 'EXEC'; }
+        .project-entry {
+            margin-bottom: 1.5rem;
+            border-left: 2px solid var(--border-color);
+            padding-left: 1rem;
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+        .project-header h3 {
+            color: var(--header-color);
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+        .project-header .role {
+            font-style: italic;
+            color: var(--secondary-accent);
+            font-size: 0.9em;
+        }
+        .project-entry ul li {
+            position: relative;
+            padding-left: 1.5em;
+            margin-bottom: 0.5rem;
+        }
+        .project-entry ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--primary-accent);
+            font-weight: 700;
+        }
+        .project-env {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 0.5em 0.8em;
+            margin-top: 0.8rem;
+            font-size: 0.85em;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .project-env strong {
+            color: var(--secondary-accent);
+            font-weight: 500;
+        }
+
+        /*----Pour la photo ----*/
+        
+        .header-container {
+            display: flex;
+            align-items: flex-start; /* Changé de 'center' à 'flex-start' */
+            gap: 20px;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .photo-adam {
+            width: 150px;
+            height: 150px;
+            border-radius: 2%;
+            align-self: flex-start; /* Ajouté pour aligner la photo en haut */
+            padding-right: 10%;
+        }
+                
+        h1 {
+            margin: 0;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        
+
+
+        /* --- Print Styles --- */
+        @media print {
+            @page {
+                size: A4;
+                margin: 1cm;
+            }
+
+            html, body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-size: 9pt;
+            }
+
+            .container {
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+                border: none;
+                box-shadow: none;
+            }
+            
+            .container::after {
+                display: none;
+            }
+
+            .sidebar, .main-content {
+                background-color: #ffffff !important;
+                padding: 0;
+            }
+            
+            .sidebar {
+                width: 33%;
+                padding-right: 1cm;
+                border-right: 1px solid #ccc;
+            }
+            
+            .main-content {
+                width: 67%;
+                padding-left: 1cm;
+            }
+
+            :root {
+                --primary-accent: #000000;
+                --secondary-accent: #333333;
+                --header-color: #000000;
+                --text-color: #000000;
+                --border-color: #cccccc;
+                --bg-color: #ffffff;
+                --panel-bg: #ffffff;
+            }
+
+            a {
+                text-decoration: none;
+                color: #000000 !important;
+            }
+
+            .cursor, .main-header h1 {
+                text-shadow: none;
+            }
+            
+            .project-env {
+                border: 1px solid #eee;
+                background-color: #f9f9f9 !important;
+            }
+            
+            .mission-box {
+                border: 1px solid #ccc;
+                background: #f9f9f9 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<aside class="sidebar">
+<section class="section contact-info">
+<h2 class="section-title" id="section-1">Identity_Matrix</h2>
+<ul>
+<li><strong>Name:</strong> Adam Guemoune</li>
+<li><strong>Location:</strong> Paris, France</li>
+<li><strong>Email:</strong> <a href="mailto:@">adam.guemoune@proton.me</a></li>
+<li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/adam-g-b5b1a6208/">Adam G</a></li>
+<li><strong>GitHub:</strong> <a href="github.com/AdamYv">AdamYV</a></li>
+</ul>
+</section>
+<section class="section mission">
+<h2 class="section-title" id="section-2">Mission_Parameters</h2>
+<div class="mission-box">
+<p><strong>Target Role:</strong> Quant Analyst / Business Analyst / Support Engineer</p>
+<p><strong>Deployment:</strong> From 2026-03-10</p>
+<p><strong>Duration:</strong> 6 Months</p>
+<p><strong>Mobility:</strong>  United Kingdom, Netherlands, Luxembourg</p>
+</div>
+
+</section>
+<section class="section skills">
+<h2 class="section-title" id="section-3">Package_Manager</h2>
+<div class="skill-category">
+<h3 id="section-3-1">// Programming</h3>
+<p>Python (Advanced), C# .NET (Advanced), SQL (Advanced), C++ (Foundational)</p>
+</div>
+<div class="skill-category">
+<h3 id="section-3-2">// Python_Ecosystem</h3>
+<p>Pandas, NumPy, PyTorch, Scikit-learn, Matplotlib, Django, yfinance, pipenv</p>
+</div>
+<div class="skill-category">
+<h3 id="section-3-3">// Microsoft_Stack</h3>
+<p>.NET Framework 4.8, WPF, Visual Studio 2022</p>
+</div>
+<div class="skill-category">
+<h3 id="section-3-4">// Databases</h3>
+<p>PostgreSQL, MySQL</p>
+</div>
+<div class="skill-category">
+<h3 id="section-3-5">// Quantitative_Finance</h3>
+<p>Financial Modeling, Quantitative Analysis, Algorithmic Trading, Backtesting, Risk Management, Asset Allocation, Portfolio Optimization</p>
+</div>
+<div class="skill-category">
+<h3 id="section-3-6">// Financial_Models</h3>
+<p>Black-Scholes, Binomial Trees, Monte-Carlo Simulation, Lotka-Volterra Systems</p>
+</div>
+<div class="skill-category">
+<h3 id="section-3-7">// Tools_&amp;_Platforms</h3>
+<p>Git, GitHub, Alpha Vantage API</p>
+</div>
+</section>
+<section class="section languages">
+<h2 class="section-title" id="section-4">Language_Packs</h2>
+<p><strong>French:</strong> Native</p>
+<p><strong>English:</strong> Professional (TOEIC: 785)</p>
+</section>
+<section class="section interests">
+<h2 class="section-title" id="section-5">Config_Interests</h2>
+<p>> Old video game (3DS,Gameboy)
+    <br>> Breaking my old Computer
+    <br>> Algo traiding 
+    
+</p>
+</section>
+</aside>
+<main class="main-content">
+<header class="main-header">
+<h1>Adam</h1>
+<div class="prompt">adam@quant-dev:~$ <span>kitty icat pics\face.png</span></div>
+<br>
+
+<img src="MOI.png" alt="No_pics" class="photo-adam">
+
+<div class="prompt">adam@quant-dev:~$ <span>./load_profile.sh</span><span class="cursor"></span></div>
+</header>
+<section class="section summary">
+<h2 class="section-title" id="section-1">Initialization_Sequence</h2>
+<p> Seeking a 6-month internship  <br>Starting March 2026. <br>Eager to apply advanced programming skills in Python and C# to solve challenging problems in the finance industry.</p>
+</section>
+<section class="section projects">
+<h2 class="section-title" id="section-2">Executed_Projects</h2>
+<div class="project-entry">
+<div class="project-header">
+<h3 id="section-2-1">Hierarchical_Clustering_Asset.py</h3>
+
+<span class="role">ML / Quant Analyst (2025)</span>
+</div>
+<ul>
+<li>Applied Agglomerative Clustering to classify asset classes, uncovering non-obvious correlations to enhance portfolio diversification.</li>
+<li>Delivered a data-driven framework for building resilient and optimized asset allocation strategies.</li>
+</ul>
+<div class="project-env"><strong>env:</strong> Python 3.11, PyTorch, Pandas, NumPy, Matplotlib, Scikit-learn</div>
+</div>
+<div class="project-entry">
+<div class="project-header">
+<h3 id="section-2-2">PINN_Financial_System_Model.py</h3>
+<span class="role">AI / Research Engineer (2025)</span>
+</div>
+<ul>
+<li>Engineered a Physics-Informed Neural Network (PINN) integrating Lotka-Volterra equations to model complex capital flows in a banking system.</li>
+<li>Produced a predictive model for 10-year capital flow simulation, providing a novel tool for systemic risk analysis.</li>
+</ul>
+<div class="project-env"><strong>env:</strong> Python 3.11, PyTorch, Pandas, NumPy, Matplotlib</div>
+</div>
+<div class="project-entry">
+<div class="project-header">
+
+<h3 id="section-2-4">Trading_Backtester_App.cs</h3>
+<span class="role">C# Developer (2025)</span>
+</div>
+<ul>
+<li>Developed a .NET WPF application to backtest trading strategies using Alpha Vantage data, implementing key metrics like ROI and Sharpe Ratio.</li>
+<li>Optimized core trading logic, achieving a theoretical 15% improvement in ROI during simulated backtests.</li>
+</ul>
+<div class="project-env"><strong>env:</strong> C# 8, .NET 4.8, WPF, Git, Visual Studio 2022, Alpha Vantage API</div>
+</div>
+<div class="project-entry">
+<div class="project-header">
+<h3 id="section-2-5">Options_Pricer_Tool.cs</h3>
+<span class="role">C# .NET Developer (2024)</span>
+</div>
+<ul>
+<li>Created a C# .NET tool for pricing European, American, and Asian options using Black-Scholes, Binomial Tree, and Monte-Carlo models.</li>
+<li>Designed an intuitive WPF interface to compare models and visualize option Greeks for sensitivity analysis.</li>
+</ul>
+<div class="project-env"><strong>env:</strong> C# 8, .NET 4.8, WPF, Git, Visual Studio 2022, Alpha Vantage API</div>
+</div>
+</section>
+<section class="section education">
+<h2 class="section-title" id="section-3">System_Logs_Education</h2>
+<div class="education-entry">
+<p class="date">2022 – 2026 (Expected)</p>
+<p class="degree">Engineering Degree in Computer Science – Major in IT for Finance</p>
+<p class="institution">EFREI Paris, Paris, France</p>
+</div>
+<div class="education-entry">
+<p class="date">2023 – 2024</p>
+<p class="degree">Bachelor’s in Computer Science (Exchange Program)</p>
+<p class="institution">VŠB – Technical University of Ostrava, Ostrava, Czech Republic</p>
+</div>
+</section>
+</main>
+</div>
+
+</body></html>
