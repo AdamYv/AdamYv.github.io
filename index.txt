@@ -1,0 +1,989 @@
+<!-- filename: cv_adam_guemoune_terminal.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam GUEMOUNE - CV Terminal</title>
+    <style>
+        /* ============================================
+           TERMINAL GEEK CV - STYLES GÉNÉRAUX
+           ============================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --terminal-bg: #0a0e14;
+            --terminal-fg: #00ff41;
+            --terminal-accent: #c6e6ec;
+            --terminal-warning: #ffaa00;
+            --terminal-error: #ff3366;
+            --terminal-comment: #5c6773;
+            --terminal-border: #1a2332;
+            --terminal-glow: rgba(0, 255, 65, 0.3);
+            --terminal-shadow: rgba(0, 0, 0, 0.8);
+        }
+        
+        body {
+            font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+            background: var(--terminal-bg);
+            color: var(--terminal-fg);
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 13px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Effet scanline pour look CRT authentique */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        /* Effet de glow subtil */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(0, 255, 65, 0.03) 0%,
+                transparent 70%
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        .terminal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(10, 14, 20, 0.95);
+            border: 2px solid var(--terminal-border);
+            border-radius: 8px;
+            box-shadow: 
+                0 0 20px var(--terminal-glow),
+                0 0 60px rgba(0, 255, 65, 0.1),
+                inset 0 0 100px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Barre de titre du terminal */
+        .terminal-header {
+            background: linear-gradient(180deg, #1a2332 0%, #0f1419 100%);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--terminal-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+        
+        .terminal-button.close { background: #ff5f56; box-shadow: 0 0 5px #ff5f56; }
+        .terminal-button.minimize { background: #ffbd2e; box-shadow: 0 0 5px #ffbd2e; }
+        .terminal-button.maximize { background: #27c93f; box-shadow: 0 0 5px #27c93f; }
+        
+        .terminal-title {
+            color: var(--terminal-comment);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .terminal-body {
+            padding: 30px;
+        }
+        
+        /* Prompt style */
+        .prompt {
+            color: var(--terminal-accent);
+            font-weight: 600;
+            text-shadow: 0 0 5px var(--terminal-accent);
+        }
+        
+        .prompt::before {
+            content: "$ ";
+            color: var(--terminal-fg);
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 35px;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-header {
+            color: var(--terminal-accent);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--terminal-border);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--terminal-accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-header::before {
+            content: ">";
+            color: var(--terminal-fg);
+            font-weight: 700;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+        
+        /* Header principal */
+        .main-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.05) 0%, rgba(0, 217, 255, 0.05) 100%);
+            border: 1px solid var(--terminal-border);
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .main-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--terminal-accent) 50%, 
+                transparent 100%);
+            box-shadow: 0 0 10px var(--terminal-accent);
+        }
+        
+        .name {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--terminal-fg);
+            text-shadow: 
+                0 0 10px var(--terminal-glow),
+                0 0 20px var(--terminal-glow),
+                0 0 30px var(--terminal-glow);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        
+        .tagline {
+            color: var(--terminal-accent);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            color: var(--terminal-comment);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contact-item::before {
+            content: "▸";
+            color: var(--terminal-fg);
+        }
+        
+        .contact-item a {
+            color: var(--terminal-accent);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .contact-item a:hover {
+            color: var(--terminal-fg);
+            text-shadow: 0 0 5px var(--terminal-fg);
+        }
+        
+        /* Mission box */
+        .mission-box {
+            background: rgba(0, 217, 255, 0.05);
+            border: 1px solid var(--terminal-accent);
+            border-left: 4px solid var(--terminal-accent);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+        }
+        
+        .mission-box .label {
+            color: var(--terminal-accent);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .mission-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .mission-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .mission-item .key {
+            color: var(--terminal-warning);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .mission-item .value {
+            color: var(--terminal-fg);
+            font-size: 13px;
+        }
+        
+        /* Skills grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-category {
+            background: rgba(0, 255, 65, 0.03);
+            border: 1px solid var(--terminal-border);
+            padding: 15px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        /* .skill-category:hover {
+            border-color: var(--terminal-accent);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+            transform: translateY(-2px);
+        } */
+        
+        .skill-category-title {
+            color: var(--terminal-warning);
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .skill-category-title::before {
+            content: "// ";
+            color: var(--terminal-comment);
+        }
+        
+        .skill-list {
+            color: var(--terminal-fg);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
+        /* Projects */
+        .project {
+            background: rgba(0, 255, 65, 0.02);
+            border: 1px solid var(--terminal-border);
+            border-left: 3px solid var(--terminal-fg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        /* .project:hover {
+            border-left-color: var(--terminal-accent);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+            transform: translateX(5px);
+        } */
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .project-title {
+            color: var(--terminal-fg);
+            font-weight: 600;
+            font-size: 14px;
+            text-shadow: 0 0 5px var(--terminal-glow);
+        }
+        
+        .project-title::before {
+            content: "def ";
+            color: var(--terminal-accent);
+            font-weight: 700;
+        }
+        
+        .project-year {
+            color: var(--terminal-warning);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            background: rgba(255, 170, 0, 0.1);
+            border-radius: 3px;
+            border: 1px solid rgba(255, 170, 0, 0.3);
+        }
+        
+        .project-role {
+            color: var(--terminal-accent);
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .project-description {
+            color: var(--terminal-comment);
+            font-size: 12px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        
+        .project-description::before {
+            content: "▸ ";
+            color: var(--terminal-fg);
+        }
+        
+        .project-env {
+            color: var(--terminal-comment);
+            font-size: 11px;
+            font-style: italic;
+            padding-top: 10px;
+            border-top: 1px solid var(--terminal-border);
+        }
+        
+        .project-env::before {
+            content: "env: ";
+            color: var(--terminal-warning);
+            font-weight: 600;
+            font-style: normal;
+        }
+        
+        /* Experience */
+        .experience {
+            background: rgba(0, 217, 255, 0.03);
+            border: 1px solid var(--terminal-border);
+            border-left: 3px solid var(--terminal-accent);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .experience-title {
+            color: var(--terminal-fg);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .experience-period {
+            color: var(--terminal-warning);
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .experience-company {
+            color: var(--terminal-accent);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .experience-description {
+            color: var(--terminal-comment);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+        
+        .experience-description::before {
+            content: "▸ ";
+            color: var(--terminal-fg);
+        }
+        
+        /* Education */
+        .education {
+            background: rgba(0, 255, 65, 0.02);
+            border: 1px solid var(--terminal-border);
+            padding: 18px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        .education-period {
+            color: var(--terminal-warning);
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .education-degree {
+            color: var(--terminal-fg);
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .education-school {
+            color: var(--terminal-accent);
+            font-size: 12px;
+        }
+        
+        /* Interests */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .interest-category {
+            background: rgba(0, 255, 65, 0.02);
+            border: 1px solid var(--terminal-border);
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        .interest-title {
+            color: var(--terminal-warning);
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .interest-title::before {
+            content: "# ";
+            color: var(--terminal-comment);
+        }
+        
+        .interest-list {
+            color: var(--terminal-comment);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        .terminal-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--terminal-comment);
+            font-size: 11px;
+            border-top: 1px solid var(--terminal-border);
+            margin-top: 40px;
+        }
+        
+        .terminal-footer::before {
+            content: "// ";
+        }
+        
+        /* STYLES D'IMPRESSION */
+        @media print {
+            body {
+                background: white;
+                color: #000;
+                padding: 0;
+            }
+            
+            body::before,
+            body::after {
+                display: none;
+            }
+            
+            .terminal-container {
+                border: 2px solid #333;
+                box-shadow: none;
+                background: white;
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            .terminal-header {
+                background: #f5f5f5;
+                border-bottom: 2px solid #333;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .terminal-button.close { background: #ff5f56 !important; }
+            .terminal-button.minimize { background: #ffbd2e !important; }
+            .terminal-button.maximize { background: #27c93f !important; }
+            
+            .terminal-body {
+                padding: 20px;
+            }
+            
+            .main-header {
+                background: #f0f0f0;
+                border: 2px solid #333;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .name {
+                color: #000;
+                text-shadow: none;
+            }
+            
+            .tagline {
+                color: #0066cc;
+            }
+            
+            .section-header {
+                color: #0066cc;
+                text-shadow: none;
+                border-bottom: 2px solid #333;
+            }
+            
+            .prompt {
+                color: #0066cc;
+                text-shadow: none;
+            }
+            
+            .contact-item,
+            .contact-item a {
+                color: #333;
+            }
+            
+            .mission-box {
+                background: #f5f5f5;
+                border: 2px solid #0066cc;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .mission-box .label {
+                color: #0066cc;
+            }
+            
+            .mission-item .key {
+                color: #cc6600;
+            }
+            
+            .mission-item .value {
+                color: #000;
+            }
+            
+            .skill-category {
+                background: #f9f9f9;
+                border: 1px solid #333;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-inside: avoid;
+            }
+            
+            .skill-category-title {
+                color: #cc6600;
+            }
+            
+            .skill-list {
+                color: #000;
+            }
+            
+            .project,
+            .experience,
+            .education {
+                background: #f9f9f9;
+                border: 1px solid #333;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-inside: avoid;
+            }
+            
+            .project {
+                border-left: 3px solid #000;
+            }
+            
+            .experience {
+                border-left: 3px solid #0066cc;
+            }
+            
+            .project-title,
+            .experience-title,
+            .education-degree {
+                color: #000;
+                text-shadow: none;
+            }
+            
+            .project-role,
+            .experience-company,
+            .education-school {
+                color: #0066cc;
+            }
+            
+            .project-year,
+            .experience-period,
+            .education-period {
+                color: #cc6600;
+                background: #fff3e0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .project-description,
+            .experience-description,
+            .project-env {
+                color: #333;
+            }
+            
+            .interest-category {
+                background: #f9f9f9;
+                border: 1px solid #333;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .interest-title {
+                color: #cc6600;
+            }
+            
+            .interest-list {
+                color: #333;
+            }
+            
+            .terminal-footer {
+                color: #666;
+                border-top: 1px solid #333;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            @page {
+                margin: 1.5cm;
+                size: A4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal-container">
+        <!-- Terminal Header -->
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button close"></div>
+                <div class="terminal-button minimize"></div>
+                <div class="terminal-button maximize"></div>
+            </div>
+            <div class="terminal-title">adam@quant-dev:~/cv$ cat resume.txt</div>
+        </div>
+        
+        <!-- Terminal Body -->
+        <div class="terminal-body">
+            <!-- Main Header -->
+            <div class="main-header">
+                <div class="name">ADAM GUEMOUNE</div>
+                <div class="tagline">// Quantitative Analyst | Software Engineer | FinTech Developer</div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span> Paris, France</span>
+                    </div>
+                    <div class="contact-item">
+                        <span> <a href="mailto:adam.guemoune@proton.me">adam.guemoune@proton.me</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span> +33 (0)7 81 28 29 48</span>
+                    </div>
+                    <div class="contact-item">
+                        <span> <a href="https://www.linkedin.com/in/adam-g-b5b1a6208/" target="_blank">LinkedIn</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span> <a href="https://github.com/AdamYv" target="_blank">GitHub: AdamYV</a></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mission Parameters -->
+            <div class="mission-box">
+                <div class="label"> MISSION PARAMETERS // Seeking Final Year Internship</div>
+                <div class="mission-details">
+                    <div class="mission-item">
+                        <span class="key">Target Role:</span>
+                        <span class="value">IT Quantitative Analyst / Business Analyst / Support Engineer</span>
+                    </div>
+                    <div class="mission-item">
+                        <span class="key">Deployment Date:</span>
+                        <span class="value">March 10, 2026</span>
+                    </div>
+                    <div class="mission-item">
+                        <span class="key">Duration:</span>
+                        <span class="value">6 Months</span>
+                    </div>
+                    <div class="mission-item">
+                        <span class="key">Mobility:</span>
+                        <span class="value">United Kingdom, Netherlands, Luxembourg</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skills Section -->
+            <div class="section">
+                <div class="section-header"> SKILLS // Technical Stack</div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-category-title">Programming Languages</div>
+                        <div class="skill-list">
+                            <strong>Python:</strong> Advanced<br>
+                            <strong>C# .NET:</strong> Advanced<br>
+                            <strong>SQL:</strong> Advanced (PostgreSQL, MySQL)<br>
+                            <strong>C++:</strong> Foundational<br>
+                            <strong>Web:</strong> HTML, CSS, JavaScript, React.js (Advanced)
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">Python Ecosystem</div>
+                        <div class="skill-list">
+                            Pandas • NumPy • PyTorch • Scikit-learn<br>
+                            Matplotlib • Seaborn • yfinance<br>
+                            Django • pipenv
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">Microsoft Stack</div>
+                        <div class="skill-list">
+                            .NET Framework 4.8<br>
+                            WPF (Windows Presentation Foundation)<br>
+                            Visual Studio 2022<br>
+                            C# 8
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">Quantitative Finance</div>
+                        <div class="skill-list">
+                            Financial Modeling • Quantitative Analysis<br>
+                            Algorithmic Trading • Backtesting<br>
+                            Risk Management • Asset Allocation<br>
+                            Portfolio Optimization
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">Financial Models</div>
+                        <div class="skill-list">
+                            Black-Scholes Model<br>
+                            Binomial Trees<br>
+                            Monte-Carlo Simulation<br>
+                            Lotka-Volterra Systems
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">Tools & Platforms</div>
+                        <div class="skill-list">
+                            Git • GitHub<br>
+                            Alpha Vantage API<br>
+                            PostgreSQL • MySQL<br>
+                            Visual Studio 2022
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">Languages</div>
+                        <div class="skill-list">
+                            <strong>French:</strong> Native<br>
+                            <strong>English:</strong> Professional (TOEIC: 785)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Projects Section -->
+            <div class="section">
+                <div class="section-header"> PROJECTS // Executed_Projects</div>
+                
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Hierarchical_Clustering_Asset.py</div>
+                        <div class="project-year">2025</div>
+                    </div>
+                    <div class="project-role">ML / Quantitative Analyst</div>
+                    <div class="project-description">
+                        Applied Agglomerative Clustering to classify asset classes, uncovering non-obvious correlations to enhance portfolio diversification. Delivered a data-driven framework for building resilient and optimized asset allocation strategies.
+                    </div>
+                    <div class="project-env">Python 3.11, Pandas, NumPy, Matplotlib, Scikit-learn, yfinance, seaborn</div>
+                </div>
+                
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">PINN_Financial_System_Model.py</div>
+                        <div class="project-year">2025</div>
+                    </div>
+                    <div class="project-role">AI / Research Engineer</div>
+                    <div class="project-description">
+                        Engineered a Physics-Informed Neural Network (PINN) integrating Lotka-Volterra equations to model complex capital flows in a banking system. Produced a predictive model for 10-year capital flow simulation, providing a novel tool for systemic risk analysis.
+                    </div>
+                    <div class="project-env">Python 3.11, PyTorch, Pandas, NumPy, Matplotlib</div>
+                </div>
+                
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Trading_Backtester_App.cs</div>
+                        <div class="project-year">2025</div>
+                    </div>
+                    <div class="project-role">C# .NET Developer</div>
+                    <div class="project-description">
+                        Developed a .NET WPF application to backtest trading strategies using Alpha Vantage data, implementing key metrics like ROI and Sharpe Ratio. Optimized core trading logic, achieving a theoretical 15% improvement in ROI during simulated backtests.
+                    </div>
+                    <div class="project-env">C# 8, .NET 4.8, WPF, Git, Visual Studio 2022, Alpha Vantage API</div>
+                </div>
+                
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Options_Pricer_Tool.cs</div>
+                        <div class="project-year">2024</div>
+                    </div>
+                    <div class="project-role">C# .NET Developer</div>
+                    <div class="project-description">
+                        Created a C# .NET tool for pricing European, American, and Asian options using Black-Scholes, Binomial Tree, and Monte-Carlo models. Designed an intuitive WPF interface to compare models and visualize option Greeks for sensitivity analysis.
+                    </div>
+                    <div class="project-env">C# 8, .NET 4.8, WPF, Git, Visual Studio 2022, Alpha Vantage API</div>
+                </div>
+            </div>
+            
+            <!-- Work Experience Section -->
+            <div class="section">
+                <div class="section-header"> WORK EXPERIENCE // System_Logs</div>
+                
+                <div class="experience">
+                    <div class="experience-header">
+                        <div class="experience-title">Web Developer</div>
+                        <div class="experience-period">Jun 2025 – Nov 2025</div>
+                    </div>
+                    <div class="experience-company">SARL ZNB</div>
+                    <div class="experience-description">
+                        Development and deployment of a Python operational intelligence system for real-time inventory management and drastic optimization of PostgreSQL performance.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Education Section -->
+            <div class="section">
+                <div class="section-header"> EDUCATION // Initialization_Sequence</div>
+                
+                <div class="education">
+                    <div class="education-period">2022 – 2026 (Expected)</div>
+                    <div class="education-degree">Engineering Degree in Computer Science – Major in IT for Finance</div>
+                    <div class="education-school">EFREI Paris, Paris, France</div>
+                </div>
+                
+                <div class="education">
+                    <div class="education-period">2023 – 2024</div>
+                    <div class="education-degree">Bachelor's in Computer Science (Exchange Program)</div>
+                    <div class="education-school">VŠB – Technical University of Ostrava, Ostrava, Czech Republic</div>
+                </div>
+            </div>
+            
+            <!-- Interests Section -->
+            <div class="section">
+                <div class="section-header"> INTERESTS // Config_Interests</div>
+                <div class="interests-grid">
+                    <div class="interest-category">
+                        <div class="interest-title">Sports</div>
+                        <div class="interest-list">
+                            Running • Swimming • Cycling<br>
+                            Boxing enthusiast
+                        </div>
+                    </div>
+                    
+                    <div class="interest-category">
+                        <div class="interest-title">Literature</div>
+                        <div class="interest-list">
+                            Financial news • Short stories<br>
+                            Novels • Philosophy
+                        </div>
+                    </div>
+                    
+                    <div class="interest-category">
+                        <div class="interest-title">Finance & Tech</div>
+                        <div class="interest-list">
+                            Algorithmic Trading Strategies<br>
+                            Open-Source FinTech Development<br>
+                            Old video games (3DS, Gameboy)<br>
+                            Hardware tinkering
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="terminal-footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

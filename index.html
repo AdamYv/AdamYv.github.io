@@ -1,989 +1,1223 @@
-<!-- filename: cv_adam_guemoune_terminal.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adam GUEMOUNE - CV Terminal</title>
+    <title>QCM - Financial Derivatives and Portfolio Management</title>
     <style>
-        /* ============================================
-           TERMINAL GEEK CV - STYLES GÉNÉRAUX
-           ============================================ */
-        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --correct-color: #27ae60;
+            --incorrect-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-bg: #2c3e50;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --terminal-bg: #0a0e14;
-            --terminal-fg: #00ff41;
-            --terminal-accent: #c6e6ec;
-            --terminal-warning: #ffaa00;
-            --terminal-error: #ff3366;
-            --terminal-comment: #5c6773;
-            --terminal-border: #1a2332;
-            --terminal-glow: rgba(0, 255, 65, 0.3);
-            --terminal-shadow: rgba(0, 0, 0, 0.8);
-        }
-        
+
         body {
-            font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
-            background: var(--terminal-bg);
-            color: var(--terminal-fg);
+            background-color: #f5f7fa;
+            color: #333;
             line-height: 1.6;
             padding: 20px;
-            font-size: 13px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        /* Effet scanline pour look CRT authentique */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 1000;
-        }
-        
-        /* Effet de glow subtil */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                ellipse at center,
-                rgba(0, 255, 65, 0.03) 0%,
-                transparent 70%
-            );
-            pointer-events: none;
-            z-index: 999;
-        }
-        
-        .terminal-container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(10, 14, 20, 0.95);
-            border: 2px solid var(--terminal-border);
-            border-radius: 8px;
-            box-shadow: 
-                0 0 20px var(--terminal-glow),
-                0 0 60px rgba(0, 255, 65, 0.1),
-                inset 0 0 100px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
         }
-        
-        /* Barre de titre du terminal */
-        .terminal-header {
-            background: linear-gradient(180deg, #1a2332 0%, #0f1419 100%);
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--terminal-border);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .terminal-buttons {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: 1px solid rgba(0, 0, 0, 0.3);
-        }
-        
-        .terminal-button.close { background: #ff5f56; box-shadow: 0 0 5px #ff5f56; }
-        .terminal-button.minimize { background: #ffbd2e; box-shadow: 0 0 5px #ffbd2e; }
-        .terminal-button.maximize { background: #27c93f; box-shadow: 0 0 5px #27c93f; }
-        
-        .terminal-title {
-            color: var(--terminal-comment);
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        
-        .terminal-body {
-            padding: 30px;
-        }
-        
-        /* Prompt style */
-        .prompt {
-            color: var(--terminal-accent);
-            font-weight: 600;
-            text-shadow: 0 0 5px var(--terminal-accent);
-        }
-        
-        .prompt::before {
-            content: "$ ";
-            color: var(--terminal-fg);
-        }
-        
-        /* Sections */
-        .section {
-            margin-bottom: 35px;
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .section-header {
-            color: var(--terminal-accent);
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--terminal-border);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--terminal-accent);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-header::before {
-            content: ">";
-            color: var(--terminal-fg);
-            font-weight: 700;
-            animation: blink 1.5s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
-        }
-        
-        /* Header principal */
-        .main-header {
+
+        header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(0, 255, 65, 0.05) 0%, rgba(0, 217, 255, 0.05) 100%);
-            border: 1px solid var(--terminal-border);
-            border-radius: 4px;
-            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
         }
-        
-        .main-header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--terminal-accent) 50%, 
-                transparent 100%);
-            box-shadow: 0 0 10px var(--terminal-accent);
-        }
-        
-        .name {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--terminal-fg);
-            text-shadow: 
-                0 0 10px var(--terminal-glow),
-                0 0 20px var(--terminal-glow),
-                0 0 30px var(--terminal-glow);
+
+        h1 {
+            color: var(--primary-color);
             margin-bottom: 10px;
-            letter-spacing: 3px;
+            font-size: 2.5rem;
         }
-        
-        .tagline {
-            color: var(--terminal-accent);
-            font-size: 14px;
-            font-weight: 500;
+
+        h2 {
+            color: var(--secondary-color);
+            margin: 20px 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #eee;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin: 15px 0 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
             margin-bottom: 20px;
-            letter-spacing: 1px;
         }
-        
-        .contact-info {
+
+        .mode-selector {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            gap: 20px;
+            margin: 30px 0;
         }
-        
-        .contact-item {
-            color: var(--terminal-comment);
-            font-size: 12px;
+
+        .mode-btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
-        
-        .contact-item::before {
-            content: "▸";
-            color: var(--terminal-fg);
+
+        .mode-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
         }
-        
-        .contact-item a {
-            color: var(--terminal-accent);
-            text-decoration: none;
-            transition: all 0.3s;
+
+        #exam-mode {
+            background-color: var(--primary-color);
+            color: white;
         }
-        
-        .contact-item a:hover {
-            color: var(--terminal-fg);
-            text-shadow: 0 0 5px var(--terminal-fg);
+
+        #learning-mode {
+            background-color: var(--secondary-color);
+            color: white;
         }
-        
-        /* Mission box */
-        .mission-box {
-            background: rgba(0, 217, 255, 0.05);
-            border: 1px solid var(--terminal-accent);
-            border-left: 4px solid var(--terminal-accent);
+
+        .instructions {
+            background-color: white;
             padding: 20px;
+            border-radius: var(--border-radius);
             margin-bottom: 30px;
-            border-radius: 4px;
-            box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+            box-shadow: var(--box-shadow);
+            border-left: 5px solid var(--secondary-color);
         }
-        
-        .mission-box .label {
-            color: var(--terminal-accent);
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+
+        .instructions h3 {
+            margin-top: 0;
         }
-        
-        .mission-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+
+        .instructions ul {
+            padding-left: 20px;
         }
-        
-        .mission-item {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
+
+        .instructions li {
+            margin-bottom: 8px;
         }
-        
-        .mission-item .key {
-            color: var(--terminal-warning);
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .mission-item .value {
-            color: var(--terminal-fg);
-            font-size: 13px;
-        }
-        
-        /* Skills grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        
-        .skill-category {
-            background: rgba(0, 255, 65, 0.03);
-            border: 1px solid var(--terminal-border);
-            padding: 15px;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-        
-        /* .skill-category:hover {
-            border-color: var(--terminal-accent);
-            box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
-            transform: translateY(-2px);
-        } */
-        
-        .skill-category-title {
-            color: var(--terminal-warning);
-            font-weight: 600;
-            font-size: 12px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .skill-category-title::before {
-            content: "// ";
-            color: var(--terminal-comment);
-        }
-        
-        .skill-list {
-            color: var(--terminal-fg);
-            font-size: 12px;
-            line-height: 1.8;
-        }
-        
-        /* Projects */
-        .project {
-            background: rgba(0, 255, 65, 0.02);
-            border: 1px solid var(--terminal-border);
-            border-left: 3px solid var(--terminal-fg);
-            padding: 20px;
+
+        .question-container {
+            background-color: white;
+            padding: 25px;
             margin-bottom: 20px;
-            border-radius: 4px;
-            transition: all 0.3s;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
         }
-        
-        /* .project:hover {
-            border-left-color: var(--terminal-accent);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
-            transform: translateX(5px);
-        } */
-        
-        .project-header {
+
+        .question-container:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .project-title {
-            color: var(--terminal-fg);
-            font-weight: 600;
-            font-size: 14px;
-            text-shadow: 0 0 5px var(--terminal-glow);
-        }
-        
-        .project-title::before {
-            content: "def ";
-            color: var(--terminal-accent);
-            font-weight: 700;
-        }
-        
-        .project-year {
-            color: var(--terminal-warning);
-            font-size: 11px;
-            font-weight: 600;
-            padding: 3px 10px;
-            background: rgba(255, 170, 0, 0.1);
-            border-radius: 3px;
-            border: 1px solid rgba(255, 170, 0, 0.3);
-        }
-        
-        .project-role {
-            color: var(--terminal-accent);
-            font-size: 12px;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        
-        .project-description {
-            color: var(--terminal-comment);
-            font-size: 12px;
-            line-height: 1.7;
-            margin-bottom: 12px;
-        }
-        
-        .project-description::before {
-            content: "▸ ";
-            color: var(--terminal-fg);
-        }
-        
-        .project-env {
-            color: var(--terminal-comment);
-            font-size: 11px;
-            font-style: italic;
-            padding-top: 10px;
-            border-top: 1px solid var(--terminal-border);
-        }
-        
-        .project-env::before {
-            content: "env: ";
-            color: var(--terminal-warning);
-            font-weight: 600;
-            font-style: normal;
-        }
-        
-        /* Experience */
-        .experience {
-            background: rgba(0, 217, 255, 0.03);
-            border: 1px solid var(--terminal-border);
-            border-left: 3px solid var(--terminal-accent);
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-        
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .experience-title {
-            color: var(--terminal-fg);
-            font-weight: 600;
-            font-size: 14px;
-        }
-        
-        .experience-period {
-            color: var(--terminal-warning);
-            font-size: 11px;
-            font-weight: 600;
-        }
-        
-        .experience-company {
-            color: var(--terminal-accent);
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        
-        .experience-description {
-            color: var(--terminal-comment);
-            font-size: 12px;
-            line-height: 1.7;
-        }
-        
-        .experience-description::before {
-            content: "▸ ";
-            color: var(--terminal-fg);
-        }
-        
-        /* Education */
-        .education {
-            background: rgba(0, 255, 65, 0.02);
-            border: 1px solid var(--terminal-border);
-            padding: 18px;
             margin-bottom: 15px;
-            border-radius: 4px;
         }
-        
-        .education-period {
-            color: var(--terminal-warning);
-            font-size: 11px;
-            font-weight: 600;
-            margin-bottom: 8px;
+
+        .question-number {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
         }
-        
-        .education-degree {
-            color: var(--terminal-fg);
-            font-weight: 600;
-            font-size: 13px;
-            margin-bottom: 5px;
+
+        .question-difficulty {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
-        
-        .education-school {
-            color: var(--terminal-accent);
-            font-size: 12px;
+
+        .difficulty-moderate {
+            background-color: #f39c12;
+            color: white;
         }
-        
-        /* Interests */
-        .interests-grid {
+
+        .difficulty-high {
+            background-color: #e67e22;
+            color: white;
+        }
+
+        .difficulty-very-high {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .options-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 15px;
+            margin-bottom: 20px;
         }
-        
-        .interest-category {
-            background: rgba(0, 255, 65, 0.02);
-            border: 1px solid var(--terminal-border);
+
+        .option {
             padding: 15px;
-            border-radius: 4px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        
-        .interest-title {
-            color: var(--terminal-warning);
-            font-weight: 600;
-            font-size: 12px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
+
+        .option:hover {
+            background-color: #f9f9f9;
+            border-color: var(--secondary-color);
         }
-        
-        .interest-title::before {
-            content: "# ";
-            color: var(--terminal-comment);
+
+        .option.selected {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-color: var(--secondary-color);
         }
-        
-        .interest-list {
-            color: var(--terminal-comment);
-            font-size: 12px;
-            line-height: 1.7;
+
+        .option.correct {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-color: var(--correct-color);
         }
-        
-        /* Footer */
-        .terminal-footer {
+
+        .option.incorrect {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-color: var(--incorrect-color);
+        }
+
+        .option-letter {
+            width: 30px;
+            height: 30px;
+            background-color: #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .selected .option-letter {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .correct .option-letter {
+            background-color: var(--correct-color);
+            color: white;
+        }
+
+        .incorrect .option-letter {
+            background-color: var(--incorrect-color);
+            color: white;
+        }
+
+        .question-feedback {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: var(--border-radius);
+            background-color: #f8f9fa;
+            display: none;
+        }
+
+        .question-feedback.show {
+            display: block;
+        }
+
+        .feedback-correct {
+            border-left: 5px solid var(--correct-color);
+        }
+
+        .feedback-incorrect {
+            border-left: 5px solid var(--incorrect-color);
+        }
+
+        .explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: var(--border-radius);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .btn-success {
+            background-color: var(--correct-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #219653;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .exam-summary {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 30px 0;
+            display: none;
+        }
+
+        .exam-summary.show {
+            display: block;
+        }
+
+        .score-container {
             text-align: center;
             padding: 20px;
-            color: var(--terminal-comment);
-            font-size: 11px;
-            border-top: 1px solid var(--terminal-border);
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin: 10px 0;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: #7f8c8d;
+        }
+
+        .results-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-stat {
+            text-align: center;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            background-color: #f8f9fa;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-correct {
+            color: var(--correct-color);
+        }
+
+        .stat-incorrect {
+            color: var(--incorrect-color);
+        }
+
+        .stat-skipped {
+            color: #95a5a6;
+        }
+
+        .correction-section {
             margin-top: 40px;
         }
-        
-        .terminal-footer::before {
-            content: "// ";
+
+        .correction-toggle {
+            background-color: var(--primary-color);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        /* STYLES D'IMPRESSION */
-        @media print {
-            body {
-                background: white;
-                color: #000;
-                padding: 0;
+
+        .correction-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .correction-content.show {
+            max-height: 5000px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--secondary-color);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
             }
             
-            body::before,
-            body::after {
-                display: none;
+            .mode-selector {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .terminal-container {
-                border: 2px solid #333;
-                box-shadow: none;
-                background: white;
-                max-width: 100%;
-                margin: 0;
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
             }
             
-            .terminal-header {
-                background: #f5f5f5;
-                border-bottom: 2px solid #333;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            
-            .terminal-button.close { background: #ff5f56 !important; }
-            .terminal-button.minimize { background: #ffbd2e !important; }
-            .terminal-button.maximize { background: #27c93f !important; }
-            
-            .terminal-body {
-                padding: 20px;
-            }
-            
-            .main-header {
-                background: #f0f0f0;
-                border: 2px solid #333;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            
-            .name {
-                color: #000;
-                text-shadow: none;
-            }
-            
-            .tagline {
-                color: #0066cc;
-            }
-            
-            .section-header {
-                color: #0066cc;
-                text-shadow: none;
-                border-bottom: 2px solid #333;
-            }
-            
-            .prompt {
-                color: #0066cc;
-                text-shadow: none;
-            }
-            
-            .contact-item,
-            .contact-item a {
-                color: #333;
-            }
-            
-            .mission-box {
-                background: #f5f5f5;
-                border: 2px solid #0066cc;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            
-            .mission-box .label {
-                color: #0066cc;
-            }
-            
-            .mission-item .key {
-                color: #cc6600;
-            }
-            
-            .mission-item .value {
-                color: #000;
-            }
-            
-            .skill-category {
-                background: #f9f9f9;
-                border: 1px solid #333;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                page-break-inside: avoid;
-            }
-            
-            .skill-category-title {
-                color: #cc6600;
-            }
-            
-            .skill-list {
-                color: #000;
-            }
-            
-            .project,
-            .experience,
-            .education {
-                background: #f9f9f9;
-                border: 1px solid #333;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                page-break-inside: avoid;
-            }
-            
-            .project {
-                border-left: 3px solid #000;
-            }
-            
-            .experience {
-                border-left: 3px solid #0066cc;
-            }
-            
-            .project-title,
-            .experience-title,
-            .education-degree {
-                color: #000;
-                text-shadow: none;
-            }
-            
-            .project-role,
-            .experience-company,
-            .education-school {
-                color: #0066cc;
-            }
-            
-            .project-year,
-            .experience-period,
-            .education-period {
-                color: #cc6600;
-                background: #fff3e0;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            
-            .project-description,
-            .experience-description,
-            .project-env {
-                color: #333;
-            }
-            
-            .interest-category {
-                background: #f9f9f9;
-                border: 1px solid #333;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            
-            .interest-title {
-                color: #cc6600;
-            }
-            
-            .interest-list {
-                color: #333;
-            }
-            
-            .terminal-footer {
-                color: #666;
-                border-top: 1px solid #333;
-            }
-            
-            .section {
-                page-break-inside: avoid;
-            }
-            
-            @page {
-                margin: 1.5cm;
-                size: A4;
+            .controls {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <div class="terminal-container">
-        <!-- Terminal Header -->
-        <div class="terminal-header">
-            <div class="terminal-buttons">
-                <div class="terminal-button close"></div>
-                <div class="terminal-button minimize"></div>
-                <div class="terminal-button maximize"></div>
-            </div>
-            <div class="terminal-title">adam@quant-dev:~/cv$ cat resume.txt</div>
-        </div>
+    <header>
+        <h1>FINAL ASSESSMENT EXAMINATION</h1>
+        <div class="subtitle">Financial Derivatives and Portfolio Management</div>
+        <div class="subtitle">EFREI 2025-2026 | Master's Level (Bac +5) | 60 minutes | 40 questions</div>
+        <div class="subtitle">Date: December 23, 2025</div>
         
-        <!-- Terminal Body -->
-        <div class="terminal-body">
-            <!-- Main Header -->
-            <div class="main-header">
-                <div class="name">ADAM GUEMOUNE</div>
-                <div class="tagline">// Quantitative Analyst | Software Engineer | FinTech Developer</div>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span> Paris, France</span>
-                    </div>
-                    <div class="contact-item">
-                        <span> <a href="mailto:adam.guemoune@proton.me">adam.guemoune@proton.me</a></span>
-                    </div>
-                    <div class="contact-item">
-                        <span> +33 (0)7 81 28 29 48</span>
-                    </div>
-                    <div class="contact-item">
-                        <span> <a href="https://www.linkedin.com/in/adam-g-b5b1a6208/" target="_blank">LinkedIn</a></span>
-                    </div>
-                    <div class="contact-item">
-                        <span> <a href="https://github.com/AdamYv" target="_blank">GitHub: AdamYV</a></span>
-                    </div>
-                </div>
+        <div class="mode-selector">
+            <button id="exam-mode" class="mode-btn">
+                <span>📝</span> Mode Examen
+            </button>
+            <button id="learning-mode" class="mode-btn">
+                <span>🎓</span> Mode Pédagogique
+            </button>
+        </div>
+    </header>
+
+    <section id="instructions" class="instructions">
+        <h3>INSTRUCTIONS</h3>
+        <p>Answer all questions. Some questions may have one correct answer, others may have multiple correct answers. Select all answers you believe are correct.</p>
+        <ul>
+            <li><strong>Mode Examen</strong>: Vous ne verrez votre score et la correction qu'à la fin du test.</li>
+            <li><strong>Mode Pédagogique</strong>: Vous saurez si votre réponse est correcte après avoir validé chaque question.</li>
+            <li>Read each question carefully</li>
+            <li>Mark your answers clearly</li>
+            <li>Time management is crucial</li>
+            <li>No electronic devices except calculators are permitted</li>
+        </ul>
+    </section>
+
+    <div class="progress-text">
+        <span id="current-question">0</span> / <span id="total-questions">40</span> questions
+    </div>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+    </div>
+
+    <main id="quiz-container">
+        <!-- Les questions seront générées dynamiquement ici -->
+    </main>
+
+    <div class="controls">
+        <button id="prev-btn" class="btn btn-secondary">← Question précédente</button>
+        <button id="next-btn" class="btn btn-primary">Question suivante →</button>
+    </div>
+
+    <div class="action-buttons" style="justify-content: center; margin-top: 40px;">
+        <button id="submit-btn" class="btn btn-success" style="padding: 15px 40px; font-size: 1.2rem;">
+            Terminer l'examen et voir le score
+        </button>
+    </div>
+
+    <section id="exam-summary" class="exam-summary">
+        <div class="score-container">
+            <h2>RÉSULTATS DE L'EXAMEN</h2>
+            <div class="score-value" id="final-score">0/40</div>
+            <div class="score-percentage" id="final-percentage">0%</div>
+            <p id="result-message"></p>
+        </div>
+
+        <div class="results-breakdown">
+            <div class="result-stat">
+                <div class="stat-value stat-correct" id="correct-count">0</div>
+                <div>Réponses correctes</div>
             </div>
-            
-            <!-- Mission Parameters -->
-            <div class="mission-box">
-                <div class="label"> MISSION PARAMETERS // Seeking Final Year Internship</div>
-                <div class="mission-details">
-                    <div class="mission-item">
-                        <span class="key">Target Role:</span>
-                        <span class="value">IT Quantitative Analyst / Business Analyst / Support Engineer</span>
-                    </div>
-                    <div class="mission-item">
-                        <span class="key">Deployment Date:</span>
-                        <span class="value">March 10, 2026</span>
-                    </div>
-                    <div class="mission-item">
-                        <span class="key">Duration:</span>
-                        <span class="value">6 Months</span>
-                    </div>
-                    <div class="mission-item">
-                        <span class="key">Mobility:</span>
-                        <span class="value">United Kingdom, Netherlands, Luxembourg</span>
-                    </div>
-                </div>
+            <div class="result-stat">
+                <div class="stat-value stat-incorrect" id="incorrect-count">0</div>
+                <div>Réponses incorrectes</div>
             </div>
-            
-            <!-- Skills Section -->
-            <div class="section">
-                <div class="section-header"> SKILLS // Technical Stack</div>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <div class="skill-category-title">Programming Languages</div>
-                        <div class="skill-list">
-                            <strong>Python:</strong> Advanced<br>
-                            <strong>C# .NET:</strong> Advanced<br>
-                            <strong>SQL:</strong> Advanced (PostgreSQL, MySQL)<br>
-                            <strong>C++:</strong> Foundational<br>
-                            <strong>Web:</strong> HTML, CSS, JavaScript, React.js (Advanced)
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <div class="skill-category-title">Python Ecosystem</div>
-                        <div class="skill-list">
-                            Pandas • NumPy • PyTorch • Scikit-learn<br>
-                            Matplotlib • Seaborn • yfinance<br>
-                            Django • pipenv
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <div class="skill-category-title">Microsoft Stack</div>
-                        <div class="skill-list">
-                            .NET Framework 4.8<br>
-                            WPF (Windows Presentation Foundation)<br>
-                            Visual Studio 2022<br>
-                            C# 8
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <div class="skill-category-title">Quantitative Finance</div>
-                        <div class="skill-list">
-                            Financial Modeling • Quantitative Analysis<br>
-                            Algorithmic Trading • Backtesting<br>
-                            Risk Management • Asset Allocation<br>
-                            Portfolio Optimization
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <div class="skill-category-title">Financial Models</div>
-                        <div class="skill-list">
-                            Black-Scholes Model<br>
-                            Binomial Trees<br>
-                            Monte-Carlo Simulation<br>
-                            Lotka-Volterra Systems
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <div class="skill-category-title">Tools & Platforms</div>
-                        <div class="skill-list">
-                            Git • GitHub<br>
-                            Alpha Vantage API<br>
-                            PostgreSQL • MySQL<br>
-                            Visual Studio 2022
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <div class="skill-category-title">Languages</div>
-                        <div class="skill-list">
-                            <strong>French:</strong> Native<br>
-                            <strong>English:</strong> Professional (TOEIC: 785)
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Projects Section -->
-            <div class="section">
-                <div class="section-header"> PROJECTS // Executed_Projects</div>
-                
-                <div class="project">
-                    <div class="project-header">
-                        <div class="project-title">Hierarchical_Clustering_Asset.py</div>
-                        <div class="project-year">2025</div>
-                    </div>
-                    <div class="project-role">ML / Quantitative Analyst</div>
-                    <div class="project-description">
-                        Applied Agglomerative Clustering to classify asset classes, uncovering non-obvious correlations to enhance portfolio diversification. Delivered a data-driven framework for building resilient and optimized asset allocation strategies.
-                    </div>
-                    <div class="project-env">Python 3.11, Pandas, NumPy, Matplotlib, Scikit-learn, yfinance, seaborn</div>
-                </div>
-                
-                <div class="project">
-                    <div class="project-header">
-                        <div class="project-title">PINN_Financial_System_Model.py</div>
-                        <div class="project-year">2025</div>
-                    </div>
-                    <div class="project-role">AI / Research Engineer</div>
-                    <div class="project-description">
-                        Engineered a Physics-Informed Neural Network (PINN) integrating Lotka-Volterra equations to model complex capital flows in a banking system. Produced a predictive model for 10-year capital flow simulation, providing a novel tool for systemic risk analysis.
-                    </div>
-                    <div class="project-env">Python 3.11, PyTorch, Pandas, NumPy, Matplotlib</div>
-                </div>
-                
-                <div class="project">
-                    <div class="project-header">
-                        <div class="project-title">Trading_Backtester_App.cs</div>
-                        <div class="project-year">2025</div>
-                    </div>
-                    <div class="project-role">C# .NET Developer</div>
-                    <div class="project-description">
-                        Developed a .NET WPF application to backtest trading strategies using Alpha Vantage data, implementing key metrics like ROI and Sharpe Ratio. Optimized core trading logic, achieving a theoretical 15% improvement in ROI during simulated backtests.
-                    </div>
-                    <div class="project-env">C# 8, .NET 4.8, WPF, Git, Visual Studio 2022, Alpha Vantage API</div>
-                </div>
-                
-                <div class="project">
-                    <div class="project-header">
-                        <div class="project-title">Options_Pricer_Tool.cs</div>
-                        <div class="project-year">2024</div>
-                    </div>
-                    <div class="project-role">C# .NET Developer</div>
-                    <div class="project-description">
-                        Created a C# .NET tool for pricing European, American, and Asian options using Black-Scholes, Binomial Tree, and Monte-Carlo models. Designed an intuitive WPF interface to compare models and visualize option Greeks for sensitivity analysis.
-                    </div>
-                    <div class="project-env">C# 8, .NET 4.8, WPF, Git, Visual Studio 2022, Alpha Vantage API</div>
-                </div>
-            </div>
-            
-            <!-- Work Experience Section -->
-            <div class="section">
-                <div class="section-header"> WORK EXPERIENCE // System_Logs</div>
-                
-                <div class="experience">
-                    <div class="experience-header">
-                        <div class="experience-title">Web Developer</div>
-                        <div class="experience-period">Jun 2025 – Nov 2025</div>
-                    </div>
-                    <div class="experience-company">SARL ZNB</div>
-                    <div class="experience-description">
-                        Development and deployment of a Python operational intelligence system for real-time inventory management and drastic optimization of PostgreSQL performance.
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Education Section -->
-            <div class="section">
-                <div class="section-header"> EDUCATION // Initialization_Sequence</div>
-                
-                <div class="education">
-                    <div class="education-period">2022 – 2026 (Expected)</div>
-                    <div class="education-degree">Engineering Degree in Computer Science – Major in IT for Finance</div>
-                    <div class="education-school">EFREI Paris, Paris, France</div>
-                </div>
-                
-                <div class="education">
-                    <div class="education-period">2023 – 2024</div>
-                    <div class="education-degree">Bachelor's in Computer Science (Exchange Program)</div>
-                    <div class="education-school">VŠB – Technical University of Ostrava, Ostrava, Czech Republic</div>
-                </div>
-            </div>
-            
-            <!-- Interests Section -->
-            <div class="section">
-                <div class="section-header"> INTERESTS // Config_Interests</div>
-                <div class="interests-grid">
-                    <div class="interest-category">
-                        <div class="interest-title">Sports</div>
-                        <div class="interest-list">
-                            Running • Swimming • Cycling<br>
-                            Boxing enthusiast
-                        </div>
-                    </div>
-                    
-                    <div class="interest-category">
-                        <div class="interest-title">Literature</div>
-                        <div class="interest-list">
-                            Financial news • Short stories<br>
-                            Novels • Philosophy
-                        </div>
-                    </div>
-                    
-                    <div class="interest-category">
-                        <div class="interest-title">Finance & Tech</div>
-                        <div class="interest-list">
-                            Algorithmic Trading Strategies<br>
-                            Open-Source FinTech Development<br>
-                            Old video games (3DS, Gameboy)<br>
-                            Hardware tinkering
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Footer -->
-            <div class="terminal-footer">
+            <div class="result-stat">
+                <div class="stat-value stat-skipped" id="skipped-count">0</div>
+                <div>Questions non répondues</div>
             </div>
         </div>
-    </div>
+
+        <button id="correction-toggle" class="correction-toggle">
+            Voir la correction détaillée
+            <span id="toggle-icon">▼</span>
+        </button>
+        
+        <div id="correction-content" class="correction-content">
+            <!-- La correction sera générée dynamiquement ici -->
+        </div>
+    </section>
+
+    <footer>
+        <p>EFREI 2025-2026 - Financial Derivatives and Portfolio Management</p>
+        <p>Cet examen est une simulation à des fins pédagogiques.</p>
+    </footer>
+
+    <script>
+        // Données des questions
+        const questions = [
+            {
+                id: 1,
+                text: "In a Forward Rate Agreement (FRA), when is the variable interest rate (such as LIBOR) typically observed?",
+                options: [
+                    "At the end of the reference period (T2)",
+                    "At the beginning of the reference period (T1)",
+                    "At the midpoint between T1 and T2",
+                    "At the time the FRA contract is initiated (t0)"
+                ],
+                correctAnswers: [1], // Index 1 = B
+                explanation: "In an FRA, the variable rate is observed at the beginning of the period (T1), and the net payment based on the interest differential is made at the end of the period (T2). This is a fundamental characteristic of FRA mechanics.",
+                difficulty: "Moderate",
+                category: "Swaps",
+                multiple: false
+            },
+            {
+                id: 2,
+                text: "A company enters an FRA to receive a fixed rate of 4% (quarterly compounded) and pay LIBOR on a $100M notional for a 3-month period starting in 3 years. If the 3-month LIBOR at that time is 4.5%, what is the cash flow at T2 (3.25 years) for the receiver?",
+                options: [
+                    "+$125,000 (receipt)",
+                    "-$125,000 (payment)",
+                    "+$123,609 (receipt)",
+                    "-$123,609 (payment)"
+                ],
+                correctAnswers: [1], // Index 1 = B
+                explanation: "Cash flow = $100M × (0.04 - 0.045) × (3/12) = -$125,000. The receiver pays because the fixed rate (4%) is lower than LIBOR (4.5%). The value of $123,609 represents the discounted payment made at T1, not the actual cash flow at T2.",
+                difficulty: "High",
+                category: "Swaps",
+                multiple: false
+            },
+            {
+                id: 3,
+                text: "Given an FRA to receive 5.8% (semiannual) on $100M between T1=1.5 and T2=2 years, with a current forward LIBOR of 5% (semiannual) for that period and a 2-year continuously compounded risk-free rate of 4%, what is the mark-to-market value of this FRA?",
+                options: [
+                    "$400,000",
+                    "$369,200",
+                    "$384,615",
+                    "$350,000"
+                ],
+                correctAnswers: [1], // Index 1 = B
+                explanation: "Using the FRA valuation formula: V = (RK - RF) × (T2 - T1) × e^(-R2×T2) × N = $100M × (0.058 - 0.050) × (0.5) × e^(-0.04×2) = $369,200. This represents the present value of receiving a higher fixed rate than the current forward rate.",
+                difficulty: "Very High",
+                category: "Swaps",
+                multiple: false
+            },
+            {
+                id: 4,
+                text: "Which of the following statements about continuous compounding are correct?",
+                options: [
+                    "Continuous compounding is the limit of actuarial compounding as frequency approaches infinity",
+                    "The formula for future value with continuous compounding is FV = P × e^(Rc×T)",
+                    "A 14% quarterly rate converts to exactly 14% continuous rate",
+                    "Continuous compounding always produces higher returns than annual compounding for the same stated rate"
+                ],
+                correctAnswers: [0, 1, 3], // A, B, D
+                explanation: "A, B, and D are correct. A: Continuous compounding is indeed the limit as frequency approaches infinity. B: The formula FV = P × e^(Rc×T) is correct. D: Continuous compounding ALWAYS produces higher effective returns than annual compounding for the same stated rate (e.g., 10% continuous = 10.517% effective vs. 10% annual = 10% effective). C is incorrect: a 14% quarterly rate converts to 13.76% continuous (not 14%).",
+                difficulty: "Moderate",
+                category: "Swaps",
+                multiple: true
+            },
+            {
+                id: 5,
+                text: "In the context of interest rate mathematics, what is 'bootstrapping' used for?",
+                options: [
+                    "Converting between different compounding frequencies",
+                    "Building a zero or forward rate curve from market prices of coupon-bearing instruments",
+                    "Calculating the present value of future cash flows",
+                    "Determining the credit spread on corporate bonds"
+                ],
+                correctAnswers: [1], // Index 1 = B
+                explanation: "Bootstrapping is the specific process of constructing a zero rate curve or forward rate curve from observable market prices of instruments like bonds and swaps. While it involves present value calculations (C), that's not its primary definition.",
+                difficulty: "High",
+                category: "Swaps",
+                multiple: false
+            },
+            {
+                id: 6,
+                text: "An Interest Rate Swap (IRS) can be conceptually viewed as:",
+                options: [
+                    "A single Forward Rate Agreement",
+                    "A portfolio of Forward Rate Agreements",
+                    "A combination of a long position in a fixed-rate bond and a short position in a floating-rate note",
+                    "An option on interest rates"
+                ],
+                correctAnswers: [1, 2], // B, C
+                explanation: "An IRS can be viewed both as a portfolio of FRAs (one for each payment period) and as a bond position (long fixed bond, short floating bond for a receiver swap). It is not a single FRA (A) nor an option (D).",
+                difficulty: "Moderate",
+                category: "Swaps",
+                multiple: true
+            },
+            {
+                id: 7,
+                text: "In a receiver swap where a financial institution receives 6-month LIBOR and pays 3% semi-annually on $100M with 1.25 years remaining, if the first floating rate was set at 2.9% and subsequent forward rates are 3.429% and 3.734%, what is the second floating cash flow?",
+                options: [
+                    "$1.45M",
+                    "$1.7145M",
+                    "$1.8672M",
+                    "$1.5M"
+                ],
+                correctAnswers: [1], // Index 1 = B
+                explanation: "The first floating cash flow is $100M × 0.029 × 6/12 = $1.45M. The second floating cash flow uses the forward rate 3.429%: $100M × 0.03429 × 6/12 = $1.7145M. The third would be $1.8672M using 3.734%.",
+                difficulty: "Very High",
+                category: "Swaps",
+                multiple: false
+            },
+            {
+                id: 8,
+                text: "At inception of an Interest Rate Swap, which of the following is true?",
+                options: [
+                    "The present value of the fixed leg equals the present value of the floating leg",
+                    "The swap has zero initial value",
+                    "The fixed swap rate is set arbitrarily by the parties",
+                    "One party must make an upfront payment to the other"
+                ],
+                correctAnswers: [0, 1], // A, B
+                explanation: "At inception, the fixed rate is set such that PV(fixed leg) = PV(floating leg), making the swap's initial value zero. No upfront payment is required (D is incorrect), and the rate is not arbitrary but determined by market conditions (C is incorrect).",
+                difficulty: "High",
+                category: "Swaps",
+                multiple: true
+            },
+            {
+                id: 9,
+                text: "What is the primary difference between an FX Swap and a Cross-Currency Swap?",
+                options: [
+                    "FX Swaps involve only one currency while Cross-Currency Swaps involve two",
+                    "Cross-Currency Swaps typically involve periodic interest payments during the swap's life, while FX Swaps do not",
+                    "FX Swaps are always longer term than Cross-Currency Swaps",
+                    "Cross-Currency Swaps cannot have floating rates"
+                ],
+                correctAnswers: [1], // Index 1 = B
+                explanation: "The key difference is that Cross-Currency Swaps involve periodic interest payments throughout the swap's life, while FX Swaps typically only involve principal exchanges at the beginning and end. Both involve two currencies (A is incorrect), FX swaps are typically shorter term (C is incorrect), and Cross-Currency Swaps can have floating rates (D is incorrect).",
+                difficulty: "Moderate",
+                category: "Swaps",
+                multiple: false
+            },
+            {
+                id: 10,
+                text: "A US company has €5M but needs USD for 3 months. The spot rate is 0.90 $/€, European interest rate is 3%, and US interest rate is 5%. What is the approximate forward rate for the FX swap?",
+                options: [
+                    "0.90 $/€",
+                    "0.8955 $/€",
+                    "0.9045 $/€",
+                    "0.92 $/€"
+                ],
+                correctAnswers: [2], // Index 2 = C
+                explanation: "Forward $rate = 0.90 × e^{((0.05 - 0.03) × 0.25)} = 0.9045 $/€. The forward rate is higher than the spot rate because the US interest rate is higher than the European rate, making the dollar relatively cheaper in the future.",
+                difficulty: "High",
+                category: "Swaps",
+                multiple: false
+            },
+            // Les 30 questions restantes seraient ajoutées ici dans une version complète
+            // Pour cet exemple, nous allons ajouter quelques questions supplémentaires
+            {
+                id: 11,
+                text: "What is a basis point in the context of interest rates?",
+                options: [
+                    "1% per annum",
+                    "0.1% per annum",
+                    "0.01% per annum",
+                    "0.001% per annum"
+                ],
+                correctAnswers: [2], // Index 2 = C
+                explanation: "One basis point (bp) is 0.01% per annum. This is a standard unit of measure for interest rates. 100 basis points = 1%.",
+                difficulty: "Moderate",
+                category: "Interest Rate Futures",
+                multiple: false
+            },
+            {
+                id: 12,
+                text: "Which of the following statements about the Federal Funds Rate are correct?",
+                options: [
+                    "It is the rate at which U.S. banks lend federal funds to each other overnight",
+                    "The FOMC sets a target rate, and Fed traders conduct open-market operations to achieve it",
+                    "To raise the FFR, the Fed buys government bonds",
+                    "The effective FFR is the volume-weighted median of all overnight federal funds transactions"
+                ],
+                correctAnswers: [0, 1, 3], // A, B, D
+                explanation: "A, B, and D are all correct. C is incorrect: to raise the FFR, the Fed sells (not buys) government bonds, which decreases money supply and increases rates.",
+                difficulty: "High",
+                category: "Interest Rate Futures",
+                multiple: true
+            },
+            {
+                id: 13,
+                text: "What was the primary reason for the phase-out of LIBOR?",
+                options: [
+                    "LIBOR rates were too volatile for practical use",
+                    "LIBOR was based on submissions rather than actual transactions, making it vulnerable to manipulation",
+                    "Central banks wanted to eliminate all benchmark rates",
+                    "LIBOR was only available for USD and needed to be expanded to other currencies"
+                ],
+                correctAnswers: [1], // Index 1 = B
+                explanation: "LIBOR was phased out because it was based on a poll of estimated borrowing rates rather than actual transactions, which made it vulnerable to manipulation. Banks could misrepresent their creditworthiness or collude to influence the rate. LIBOR existed for multiple currencies (D is incorrect).",
+                difficulty: "Very High",
+                category: "Interest Rate Futures",
+                multiple: false
+            },
+            {
+                id: 14,
+                text: "What is the TED Spread?",
+                options: [
+                    "The difference between 3-month US LIBOR and 3-month Treasury bill rate",
+                    "The difference between SOFR and LIBOR",
+                    "The spread between European and US interest rates",
+                    "The difference between the Federal Funds Rate and LIBOR"
+                ],
+                correctAnswers: [0], // Index 0 = A
+                explanation: "The TED Spread (Treasury-EuroDollar) is specifically the difference between 3-month US LIBOR and the 3-month Treasury bill rate. It was used as an indicator of perceived credit risk in the banking system.",
+                difficulty: "Moderate",
+                category: "Interest Rate Futures",
+                multiple: false
+            },
+            {
+                id: 15,
+                text: "Which of the following statements about SOFR (Secured Overnight Financing Rate) are correct?",
+                options: [
+                    "SOFR is an unsecured rate like LIBOR was",
+                    "SOFR measures the cost of borrowing USD overnight collateralized by Treasury securities",
+                    "SOFR is based on actual transactions in the Treasury repo market",
+                    "SOFR replaced LIBOR as the primary USD reference rate"
+                ],
+                correctAnswers: [1, 2, 3], // B, C, D
+                explanation: "B, C, and D are correct. A is incorrect: SOFR is a secured rate (collateralized by Treasury securities), unlike LIBOR which was unsecured. This is a key difference between the two rates.",
+                difficulty: "High",
+                category: "Interest Rate Futures",
+                multiple: true
+            }
+        ];
+
+        // État de l'application
+        let currentMode = null; // 'exam' ou 'learning'
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let quizCompleted = false;
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Afficher les questions
+            displayQuestions();
+            
+            // Gestionnaires d'événements pour les boutons de mode
+            document.getElementById('exam-mode').addEventListener('click', () => selectMode('exam'));
+            document.getElementById('learning-mode').addEventListener('click', () => selectMode('learning'));
+            
+            // Gestionnaires pour les boutons de navigation
+            document.getElementById('prev-btn').addEventListener('click', showPreviousQuestion);
+            document.getElementById('next-btn').addEventListener('click', showNextQuestion);
+            
+            // Gestionnaire pour le bouton de soumission
+            document.getElementById('submit-btn').addEventListener('click', submitQuiz);
+            
+            // Gestionnaire pour le toggle de correction
+            document.getElementById('correction-toggle').addEventListener('click', toggleCorrection);
+            
+            // Mettre à jour le progrès
+            updateProgress();
+            
+            // Afficher la première question
+            showQuestion(currentQuestionIndex);
+        });
+
+        // Sélection du mode
+        function selectMode(mode) {
+            currentMode = mode;
+            
+            // Cacher le sélecteur de mode
+            document.querySelector('.mode-selector').classList.add('hidden');
+            
+            // Mettre à jour les instructions
+            const instructions = document.getElementById('instructions');
+            if (mode === 'exam') {
+                instructions.innerHTML = `
+                    <h3>MODE EXAMEN - INSTRUCTIONS</h3>
+                    <p>Vous êtes en mode examen. Vous ne verrez pas les corrections pendant le test. Une fois toutes les questions répondues, cliquez sur "Terminer l'examen et voir le score" pour obtenir vos résultats et la correction complète.</p>
+                    <ul>
+                        <li>Vous pouvez naviguer entre les questions avec les boutons "Précédent" et "Suivant"</li>
+                        <li>Votre score final et la correction ne seront disponibles qu'à la fin</li>
+                        <li>Le timer n'est pas implémenté dans cette version simulée</li>
+                    </ul>
+                `;
+            } else {
+                instructions.innerHTML = `
+                    <h3>MODE PÉDAGOGIQUE - INSTRUCTIONS</h3>
+                    <p>Vous êtes en mode pédagogique. Après avoir sélectionné vos réponses pour une question, cliquez sur "Valider cette question" pour voir immédiatement si vos réponses sont correctes et obtenir une explication.</p>
+                    <ul>
+                        <li>Vous pouvez valider chaque question individuellement</li>
+                        <li>Les réponses correctes et incorrectes seront immédiatement visibles</li>
+                        <li>Vous pouvez toujours modifier vos réponses après validation</li>
+                    </ul>
+                `;
+            }
+            
+            // Afficher les contrôles de navigation
+            document.querySelector('.controls').classList.remove('hidden');
+            document.querySelector('.progress-bar').classList.remove('hidden');
+            document.querySelector('.progress-text').classList.remove('hidden');
+            
+            // Réinitialiser les réponses
+            userAnswers = {};
+            currentQuestionIndex = 0;
+            quizCompleted = false;
+            
+            // Afficher la première question
+            showQuestion(currentQuestionIndex);
+        }
+
+        // Afficher les questions dans le conteneur
+        function displayQuestions() {
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = '';
+            
+            questions.forEach((question, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question-container';
+                questionElement.id = `question-${index}`;
+                questionElement.style.display = index === 0 ? 'block' : 'none';
+                
+                // Déterminer la classe de difficulté
+                let difficultyClass = '';
+                switch(question.difficulty) {
+                    case 'Moderate': difficultyClass = 'difficulty-moderate'; break;
+                    case 'High': difficultyClass = 'difficulty-high'; break;
+                    case 'Very High': difficultyClass = 'difficulty-very-high'; break;
+                }
+                
+                questionElement.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">Question ${question.id}</div>
+                        <div class="question-difficulty ${difficultyClass}">${question.difficulty}</div>
+                    </div>
+                    <div class="question-text">${question.text}</div>
+                    <div class="options-container">
+                        ${question.options.map((option, optIndex) => `
+                            <div class="option" data-question="${index}" data-option="${optIndex}">
+                                <div class="option-letter">${String.fromCharCode(65 + optIndex)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div id="feedback-${index}" class="question-feedback">
+                        <div id="feedback-text-${index}"></div>
+                        <div class="explanation" id="explanation-${index}"></div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary validate-btn" data-question="${index}">Valider cette question</button>
+                    </div>
+                `;
+                
+                quizContainer.appendChild(questionElement);
+            });
+            
+            // Ajouter des événements aux options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.getAttribute('data-question'));
+                    const optionIndex = parseInt(this.getAttribute('data-option'));
+                    selectOption(questionIndex, optionIndex, this);
+                });
+            });
+            
+            // Ajouter des événements aux boutons de validation
+            document.querySelectorAll('.validate-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.getAttribute('data-question'));
+                    validateQuestion(questionIndex);
+                });
+            });
+        }
+
+        // Sélectionner une option
+        function selectOption(questionIndex, optionIndex, element) {
+            const question = questions[questionIndex];
+            
+            // Si ce n'est pas une question à choix multiple, désélectionner toutes les autres options
+            if (!question.multiple) {
+                document.querySelectorAll(`.option[data-question="${questionIndex}"]`).forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+            }
+            
+            // Basculer la sélection
+            element.classList.toggle('selected');
+            
+            // Mettre à jour les réponses de l'utilisateur
+            if (!userAnswers[questionIndex]) {
+                userAnswers[questionIndex] = [];
+            }
+            
+            if (element.classList.contains('selected')) {
+                // Ajouter l'option si elle n'est pas déjà sélectionnée
+                if (!userAnswers[questionIndex].includes(optionIndex)) {
+                    userAnswers[questionIndex].push(optionIndex);
+                }
+            } else {
+                // Retirer l'option
+                userAnswers[questionIndex] = userAnswers[questionIndex].filter(idx => idx !== optionIndex);
+            }
+            
+            // Si aucune option n'est sélectionnée, supprimer l'entrée
+            if (userAnswers[questionIndex].length === 0) {
+                delete userAnswers[questionIndex];
+            }
+            
+            // Dans le mode examen, on ne valide pas automatiquement
+            // Dans le mode pédagogique, on pourrait valider automatiquement, mais nous laissons l'utilisateur cliquer sur "Valider"
+        }
+
+        // Valider une question (mode pédagogique seulement)
+        function validateQuestion(questionIndex) {
+            if (currentMode !== 'learning') return;
+            
+            const question = questions[questionIndex];
+            const userAnswer = userAnswers[questionIndex] || [];
+            const feedbackElement = document.getElementById(`feedback-${questionIndex}`);
+            const feedbackTextElement = document.getElementById(`feedback-text-${questionIndex}`);
+            const explanationElement = document.getElementById(`explanation-${questionIndex}`);
+            
+            // Vérifier si la réponse est correcte
+            const isCorrect = arraysEqual(userAnswer.sort(), question.correctAnswers.sort());
+            
+            // Afficher le feedback
+            feedbackElement.classList.add('show');
+            feedbackElement.classList.remove('feedback-correct', 'feedback-incorrect');
+            
+            if (isCorrect) {
+                feedbackElement.classList.add('feedback-correct');
+                feedbackTextElement.innerHTML = `<strong>✅ Correct!</strong> Vous avez bien répondu à cette question.`;
+            } else {
+                feedbackElement.classList.add('feedback-incorrect');
+                let correctLetters = question.correctAnswers.map(idx => String.fromCharCode(65 + idx)).join(', ');
+                feedbackTextElement.innerHTML = `<strong>❌ Incorrect.</strong> La bonne réponse est : ${correctLetters}.`;
+            }
+            
+            // Afficher l'explication
+            explanationElement.innerHTML = `<strong>Explication :</strong> ${question.explication || question.explanation}`;
+            
+            // Mettre à jour l'affichage des options
+            document.querySelectorAll(`.option[data-question="${questionIndex}"]`).forEach(option => {
+                const optionIndex = parseInt(option.getAttribute('data-option'));
+                option.classList.remove('correct', 'incorrect');
+                
+                if (question.correctAnswers.includes(optionIndex)) {
+                    option.classList.add('correct');
+                } else if (userAnswer.includes(optionIndex)) {
+                    option.classList.add('incorrect');
+                }
+            });
+        }
+
+        // Afficher une question spécifique
+        function showQuestion(index) {
+            // Masquer toutes les questions
+            document.querySelectorAll('.question-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            
+            // Afficher la question demandée
+            const questionElement = document.getElementById(`question-${index}`);
+            if (questionElement) {
+                questionElement.style.display = 'block';
+                
+                // Mettre à jour l'index de la question actuelle
+                currentQuestionIndex = index;
+                
+                // Mettre à jour l'affichage du progrès
+                updateProgress();
+                
+                // Mettre à jour l'état des boutons de navigation
+                document.getElementById('prev-btn').disabled = index === 0;
+                document.getElementById('next-btn').disabled = index === questions.length - 1;
+                
+                // Restaurer les sélections de l'utilisateur pour cette question
+                restoreSelections(index);
+                
+                // Si nous sommes en mode examen, masquer le feedback
+                if (currentMode === 'exam') {
+                    const feedbackElement = document.getElementById(`feedback-${index}`);
+                    feedbackElement.classList.remove('show');
+                    
+                    // Masquer également les marques de correction sur les options
+                    document.querySelectorAll(`.option[data-question="${index}"]`).forEach(option => {
+                        option.classList.remove('correct', 'incorrect');
+                    });
+                }
+            }
+        }
+
+        // Restaurer les sélections pour une question
+        function restoreSelections(questionIndex) {
+            const userAnswer = userAnswers[questionIndex];
+            if (!userAnswer) return;
+            
+            userAnswer.forEach(optionIndex => {
+                const optionElement = document.querySelector(`.option[data-question="${questionIndex}"][data-option="${optionIndex}"]`);
+                if (optionElement) {
+                    optionElement.classList.add('selected');
+                }
+            });
+        }
+
+        // Afficher la question précédente
+        function showPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                showQuestion(currentQuestionIndex - 1);
+            }
+        }
+
+        // Afficher la question suivante
+        function showNextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                showQuestion(currentQuestionIndex + 1);
+            }
+        }
+
+        // Soumettre le quiz (mode examen seulement)
+        function submitQuiz() {
+            if (currentMode !== 'exam') return;
+            
+            quizCompleted = true;
+            
+            // Calculer le score
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let skippedCount = 0;
+            
+            questions.forEach((question, index) => {
+                const userAnswer = userAnswers[index] || [];
+                const isCorrect = arraysEqual(userAnswer.sort(), question.correctAnswers.sort());
+                
+                if (userAnswer.length === 0) {
+                    skippedCount++;
+                } else if (isCorrect) {
+                    correctCount++;
+                } else {
+                    incorrectCount++;
+                }
+            });
+            
+            // Afficher le résumé
+            displayResults(correctCount, incorrectCount, skippedCount);
+            
+            // Générer la correction
+            generateCorrection();
+            
+            // Faire défiler jusqu'au résumé
+            document.getElementById('exam-summary').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Afficher les résultats
+        function displayResults(correct, incorrect, skipped) {
+            const totalQuestions = questions.length;
+            const percentage = Math.round((correct / totalQuestions) * 100);
+            
+            document.getElementById('final-score').textContent = `${correct}/${totalQuestions}`;
+            document.getElementById('final-percentage').textContent = `${percentage}%`;
+            document.getElementById('correct-count').textContent = correct;
+            document.getElementById('incorrect-count').textContent = incorrect;
+            document.getElementById('skipped-count').textContent = skipped;
+            
+            // Message personnalisé
+            let message = '';
+            if (percentage >= 90) {
+                message = "Excellent! Vous maîtrisez parfaitement le sujet.";
+            } else if (percentage >= 70) {
+                message = "Bon travail! Vous avez une bonne compréhension du sujet.";
+            } else if (percentage >= 50) {
+                message = "Passable. Vous devriez revoir certains concepts.";
+            } else {
+                message = "Insuffisant. Nous vous recommandons de réviser le cours.";
+            }
+            
+            document.getElementById('result-message').textContent = message;
+            
+            // Afficher le résumé
+            document.getElementById('exam-summary').classList.add('show');
+        }
+
+        // Générer la correction
+        function generateCorrection() {
+            const correctionContent = document.getElementById('correction-content');
+            correctionContent.innerHTML = '';
+            
+            questions.forEach((question, index) => {
+                const userAnswer = userAnswers[index] || [];
+                const isCorrect = arraysEqual(userAnswer.sort(), question.correctAnswers.sort());
+                
+                const correctionItem = document.createElement('div');
+                correctionItem.className = 'question-container';
+                
+                let userAnswerText = 'Aucune réponse';
+                if (userAnswer.length > 0) {
+                    userAnswerText = userAnswer.map(idx => String.fromCharCode(65 + idx)).join(', ');
+                }
+                
+                const correctAnswerText = question.correctAnswers.map(idx => String.fromCharCode(65 + idx)).join(', ');
+                
+                correctionItem.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">Question ${question.id}</div>
+                        <div class="question-difficulty ${isCorrect ? 'difficulty-moderate' : 'difficulty-very-high'}">
+                            ${isCorrect ? '✅ Correct' : '❌ Incorrect'}
+                        </div>
+                    </div>
+                    <div class="question-text">${question.text}</div>
+                    <div style="margin: 15px 0;">
+                        <p><strong>Votre réponse :</strong> ${userAnswerText}</p>
+                        <p><strong>Réponse correcte :</strong> ${correctAnswerText}</p>
+                    </div>
+                    <div class="explanation">
+                        <strong>Explication :</strong> ${question.explication || question.explanation}
+                    </div>
+                `;
+                
+                correctionContent.appendChild(correctionItem);
+            });
+        }
+
+        // Basculer l'affichage de la correction
+        function toggleCorrection() {
+            const correctionContent = document.getElementById('correction-content');
+            const toggleIcon = document.getElementById('toggle-icon');
+            
+            if (correctionContent.classList.contains('show')) {
+                correctionContent.classList.remove('show');
+                toggleIcon.textContent = '▼';
+            } else {
+                correctionContent.classList.add('show');
+                toggleIcon.textContent = '▲';
+            }
+        }
+
+        // Mettre à jour la barre de progression
+        function updateProgress() {
+            const progressFill = document.getElementById('progress-fill');
+            const currentQuestionElement = document.getElementById('current-question');
+            const totalQuestionsElement = document.getElementById('total-questions');
+            
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            
+            currentQuestionElement.textContent = currentQuestionIndex + 1;
+            totalQuestionsElement.textContent = questions.length;
+        }
+
+        // Utilitaire: comparer deux tableaux
+        function arraysEqual(arr1, arr2) {
+            if (arr1.length !== arr2.length) return false;
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr1[i] !== arr2[i]) return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
