@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Option Pricer – démo et détails | Adam Guemoune</title>
+  <meta name="description" content="Pricer d'options européennes, américaines et asiatiques en C# : Black-Scholes, arbre binomial, Monte-Carlo, Grecs. Démo interactive avec graphiques du prix et des Grecs.">
+  <link rel="canonical" href="https://adamyv.github.io/projets/option-pricer.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://adamyv.github.io/projets/option-pricer.html">
+  <meta property="og:title" content="Option Pricer – Adam Guemoune">
+  <meta property="og:description" content="Black-Scholes, arbre binomial CRR, Monte-Carlo et Grecs, avec une démo interactive.">
+  <meta property="og:image" content="https://adamyv.github.io/assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232160b0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../">adam.guemoune</a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="../#projets">Projets</a>
+        <a href="#demo">Démo</a>
+        <a href="https://github.com/AdamYv/Option-Pricer">Code</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Changer de thème">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <div class="container page-head">
+      <p class="breadcrumb"><a href="../#projets">← Projets</a></p>
+      <p class="eyebrow">Projet personnel · C# · .NET 8 · WPF</p>
+      <h1>Option Pricer</h1>
+      <p class="pitch" style="color:var(--text-2);max-width:65ch">Une application de bureau qui valorise des options européennes, américaines et asiatiques et calcule leurs Grecs. Cette page en reprend les moteurs européen et américain en JavaScript pour les tester directement dans le navigateur.</p>
+      <div class="cta">
+        <a class="btn" href="https://github.com/AdamYv/Option-Pricer">Voir le code sur GitHub</a>
+      </div>
+    </div>
+
+    <!-- ================= Démo ================= -->
+    <section id="demo" aria-labelledby="demo-titre">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="demo-titre">Démo interactive</h2>
+          <p>Déplacez les curseurs : le prix, les Grecs et les courbes se recalculent.</p>
+        </div>
+
+        <div class="pricer" data-pricer>
+          <form aria-label="Paramètres de l'option">
+            <fieldset class="field">
+              <legend>Exercice</legend>
+              <div class="segmented">
+                <label><input type="radio" name="style" value="european" checked><span>Européenne</span></label>
+                <label><input type="radio" name="style" value="american"><span>Américaine</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field">
+              <legend>Type</legend>
+              <div class="segmented">
+                <label><input type="radio" name="type" value="call" checked><span>Call</span></label>
+                <label><input type="radio" name="type" value="put"><span>Put</span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="f-S">Spot S</label>
+              <div class="field-row"><input id="f-S" name="S" type="range" min="50" max="150" step="1" value="100"><output for="f-S"></output></div>
+            </div>
+            <div class="field">
+              <label for="f-K">Strike K</label>
+              <div class="field-row"><input id="f-K" name="K" type="range" min="50" max="150" step="1" value="100"><output for="f-K"></output></div>
+            </div>
+            <div class="field">
+              <label for="f-sigma">Volatilité σ</label>
+              <div class="field-row"><input id="f-sigma" name="sigma" type="range" min="5" max="80" step="1" value="20" data-unit=" %"><output for="f-sigma"></output></div>
+            </div>
+            <div class="field">
+              <label for="f-r">Taux sans risque r</label>
+              <div class="field-row"><input id="f-r" name="r" type="range" min="0" max="10" step="0.25" value="5" data-unit=" %" data-decimals="2"><output for="f-r"></output></div>
+            </div>
+            <div class="field">
+              <label for="f-q">Dividende continu q</label>
+              <div class="field-row"><input id="f-q" name="q" type="range" min="0" max="10" step="0.25" value="0" data-unit=" %" data-decimals="2"><output for="f-q"></output></div>
+            </div>
+            <div class="field">
+              <label for="f-T">Maturité T (années)</label>
+              <div class="field-row"><input id="f-T" name="T" type="range" min="0.1" max="3" step="0.05" value="1" data-decimals="2"><output for="f-T"></output></div>
+            </div>
+          </form>
+
+          <div>
+            <div class="results" aria-live="polite">
+              <div class="stat stat-main"><div class="label">Prix</div><div class="value" data-out="price">–</div></div>
+              <div class="stat"><div class="label">Δ Delta</div><div class="value" data-out="delta">–</div></div>
+              <div class="stat"><div class="label">Γ Gamma</div><div class="value" data-out="gamma">–</div></div>
+              <div class="stat"><div class="label">Θ Theta / jour</div><div class="value" data-out="theta">–</div></div>
+              <div class="stat"><div class="label">ν Vega / 1 %</div><div class="value" data-out="vega">–</div></div>
+              <div class="stat"><div class="label">ρ Rho / 1 %</div><div class="value" data-out="rho">–</div></div>
+            </div>
+            <p class="note" style="margin:8px 0 0">Modèle : <span data-out="model"></span>.</p>
+
+            <div class="charts">
+              <div class="chart-card" data-chart="price">
+                <h3>Prix de l'option selon le spot</h3>
+                <ul class="legend">
+                  <li><span class="swatch" aria-hidden="true"></span>Prix</li>
+                  <li><span class="swatch swatch-ref" aria-hidden="true"></span>Valeur intrinsèque (payoff à l'échéance)</li>
+                </ul>
+                <div class="chart-holder"></div>
+              </div>
+              <div class="chart-grid">
+                <div class="chart-card" data-chart="delta"><h3>Delta</h3><p class="sub">Sensibilité au spot</p><div class="chart-holder"></div></div>
+                <div class="chart-card" data-chart="gamma"><h3>Gamma</h3><p class="sub">Variation du Delta</p><div class="chart-holder"></div></div>
+                <div class="chart-card" data-chart="vega"><h3>Vega</h3><p class="sub">Pour 1 point de volatilité</p><div class="chart-holder"></div></div>
+                <div class="chart-card" data-chart="theta"><h3>Theta</h3><p class="sub">Perte de valeur par jour</p><div class="chart-holder"></div></div>
+              </div>
+              <p class="note" style="margin:0">Le trait pointillé vertical marque le spot choisi. Survolez ou touchez un graphique pour lire les valeurs.</p>
+              <details class="data-table" data-table>
+                <summary>Voir les valeurs sous forme de tableau</summary>
+                <div class="table-wrap" style="margin-top:8px">
+                  <table>
+                    <thead><tr><th>Spot</th><th>Prix</th><th>Delta</th><th>Gamma</th><th>Vega / 1 %</th><th>Theta / jour</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <noscript><p>La démo nécessite JavaScript.</p></noscript>
+      </div>
+    </section>
+
+    <!-- ================= Détails ================= -->
+    <section aria-labelledby="details-titre">
+      <div class="container prose">
+        <h2 id="details-titre">Contexte</h2>
+        <p>Projet personnel réalisé en mars 2025, pendant ma majeure Informatique pour la Finance ; Grecs et tests ajoutés en novembre 2026. L'utilisateur choisit le type d'option, saisit ses paramètres et obtient le prix et les Grecs. Pour l'option asiatique, le cours et la volatilité historique du sous-jacent sont récupérés via l'API Alpha Vantage.</p>
+
+        <h2>Modèles</h2>
+        <ul>
+          <li><strong>Européenne : Black-Scholes.</strong> Formule fermée ; Grecs analytiques.
+            <p class="formula"><var>d</var><sub>1</sub> = [ln(<var>S</var>/<var>K</var>) + (<var>r</var> + σ²/2)<var>T</var>] / (σ√<var>T</var>), &nbsp; <var>d</var><sub>2</sub> = <var>d</var><sub>1</sub> − σ√<var>T</var></p>
+          </li>
+          <li><strong>Américaine : arbre binomial de Cox-Ross-Rubinstein.</strong> <var>u</var> = e<sup>σ√Δt</sup>, <var>d</var> = 1/<var>u</var>, dividende continu ; à chaque nœud, la valeur est le maximum entre la continuation actualisée et l'exercice immédiat. Delta, Gamma et Theta sont lus sur les premiers nœuds de l'arbre ; Vega et Rho par chocs centrés.</li>
+          <li><strong>Asiatique (moyenne arithmétique) : Monte-Carlo.</strong> Trajectoires de mouvement brownien géométrique à 252 pas par an, simulées en parallèle (<code>Parallel.For</code>). Chaque trajectoire a son propre générateur dérivé d'une graine : le prix est reproductible et les prix choqués servant aux Grecs réutilisent exactement les mêmes tirages (nombres aléatoires communs).</li>
+        </ul>
+
+        <h2>Choix d'implémentation</h2>
+        <ul>
+          <li>Les moteurs de calcul sont séparés de l'interface WPF : le projet de tests xUnit les compile seuls et tourne sur n'importe quel OS.</li>
+          <li>17 tests : exemple de Hull (call 4,76, put 0,81), parité call-put, Grecs fermés comparés aux différences finies, call américain sans dividende égal à l'européen, put américain de référence à 6,09, reproductibilité du Monte-Carlo.</li>
+          <li>Ces tests ont révélé deux bugs, corrigés : un exposant décalé dans l'arbre binomial (call américain à 10,86 au lieu de 10,45) et Theta et Vega inversés dans l'affichage des Grecs européens. Ils ont aussi montré qu'une Gamma par chocs sur un arbre court est très bruitée, d'où la lecture sur les nœuds.</li>
+          <li>La clé de l'API est lue dans une variable d'environnement, jamais dans le code.</li>
+        </ul>
+
+        <h2>Limites et pistes</h2>
+        <ul>
+          <li>Volatilité constante : pas de smile ni de surface de volatilité implicite.</li>
+          <li>Monte-Carlo sans réduction de variance ; une variable de contrôle (l'asiatique géométrique, qui a une formule fermée) réduirait fortement l'erreur.</li>
+          <li>La démo de cette page couvre l'européenne et l'américaine ; l'asiatique reste dans l'application, car elle dépend de l'API de données.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© 2026 Adam Guemoune · <a href="mailto:adam.guemoune@proton.me">adam.guemoune@proton.me</a></span>
+      <span><a href="../">Retour au portfolio</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+  <script type="module">
+    import { initPricer } from "../assets/js/pricer.js";
+    initPricer(document.querySelector("[data-pricer]"));
+  </script>
+</body>
+</html>
