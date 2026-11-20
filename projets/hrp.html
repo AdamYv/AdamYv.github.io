@@ -13,23 +13,21 @@
   <meta property="og:description" content="Hierarchical Risk Parity (López de Prado) comparé à Markowitz par un backtest walk-forward hors échantillon sur 2016-2025 : méthode, résultats et limites.">
   <meta property="og:image" content="https://adamyv.github.io/assets/img/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232160b0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
-  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230057e0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.classList.add("js")</script>
+  <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="../">adam.guemoune</a>
+      <a class="brand" href="../">Adam Guemoune</a>
       <nav class="nav" aria-label="Navigation principale">
         <a href="../#projets">Projets</a>
         <a href="https://github.com/AdamYv/Hierarchical-Clustering-Asset">Code</a>
       </nav>
-      <button class="theme-toggle" type="button" aria-label="Changer de thème">
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-      </button>
     </div>
   </header>
 
@@ -38,11 +36,11 @@
       <p class="breadcrumb"><a href="../#projets">← Projets</a></p>
       <p class="eyebrow">Projet personnel · Python · sept.–nov. 2025, backtest ajouté en novembre 2026</p>
       <h1>Hierarchical Risk Parity vs Markowitz</h1>
-      <p style="color:var(--text-2);max-width:65ch;font-size:1.05rem">Un framework d'allocation d'actifs par clustering hiérarchique, avec une implémentation de HRP et un backtest hors échantillon face à Markowitz.</p>
+      <p class="lead">Un framework d'allocation d'actifs par clustering hiérarchique, avec une implémentation de HRP et un backtest hors échantillon face à Markowitz.</p>
       <div class="cta"><a class="btn" href="https://github.com/AdamYv/Hierarchical-Clustering-Asset">Voir le code sur GitHub</a></div>
     </div>
 
-    <section>
+    <section class="block">
       <div class="container prose">
         <h2>Le problème</h2>
         <p>L'optimisation de Markowitz inverse la matrice de covariance des rendements. Estimée sur des données bruitées, cette matrice est mal conditionnée : de petites erreurs d'estimation produisent des poids instables, souvent concentrés sur quelques actifs. Hierarchical Risk Parity (López de Prado, 2016) évite cette inversion en s'appuyant sur la structure hiérarchique des corrélations.</p>
@@ -86,6 +84,20 @@
           <li>Le classement dépend de l'univers : sur un portefeuille de 8 valeurs technologiques, Markowitz Sharpe maximal dépasse HRP (48,5 % contre 31,2 % par an).</li>
         </ul>
 
+        <h2>Aperçu des sorties du framework</h2>
+        <p>Pour un univers d'actifs donné, le framework télécharge les prix, calcule les corrélations, regroupe les actifs et produit des graphiques et un rapport PDF de 9 pages. Ci-dessous, une exécution sur le preset <code>default</code> (2015–2025).</p>
+      </div>
+      <div class="container shots">
+        <figure>
+          <img src="../assets/img/shot-hrp-dendrogram.webp" width="1200" height="682" loading="lazy" alt="Dendrogramme : AGG et TLT fusionnent tôt puis rejoignent GLD ; AAPL, GOOGL et MSFT forment un groupe ; EEM et EFA sont très proches ; USO reste isolé.">
+          <figcaption>Dendrogramme du clustering hiérarchique : plus la fusion est basse, plus les actifs sont corrélés (obligations AGG et TLT, valeurs technologiques, marchés internationaux EFA et EEM).</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/img/shot-hrp-report.webp" width="1200" height="522" loading="lazy" alt="Trois pages du rapport PDF généré : page de titre, tableau de l'univers d'actifs avec rendement, volatilité, Sharpe et poids, et page d'analyse de performance.">
+          <figcaption>Extrait du rapport PDF généré automatiquement (ReportLab) : page de titre, univers d'actifs, analyse de performance.</figcaption>
+        </figure>
+      </div>
+      <div class="container prose">
         <h2>Ce que j'en retire</h2>
         <p>Un protocole propre (estimation glissante, pas de biais d'anticipation, tests unitaires) compte plus que le chiffre final. HRP tient sa promesse de stabilité face à Markowitz, mais une allocation naïve peut gagner sur une période donnée, et le résultat change avec l'univers d'actifs.</p>
 

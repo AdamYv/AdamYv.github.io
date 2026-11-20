@@ -4,25 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Adam Guemoune – Junior Quant Developer (C# · C++ · Python)</title>
-  <meta name="description" content="Portfolio d'Adam Guemoune, ingénieur EFREI 2026 en informatique pour la finance : pricer d'options C#, allocation HRP vs Markowitz, modèles de Markov cachés. Code, démos et résultats.">
+  <meta name="description" content="Portfolio d'Adam Guemoune, ingénieur EFREI 2026 en informatique pour la finance : pricer d'options en C#, allocation HRP vs Markowitz, modèles de Markov cachés. Code, démos et résultats.">
   <meta name="author" content="Adam Guemoune">
   <link rel="canonical" href="https://adamyv.github.io/">
-  <meta name="theme-color" content="#111316" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#fcfcfb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#ffffff">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:url" content="https://adamyv.github.io/">
   <meta property="og:title" content="Adam Guemoune – Junior Quant Developer">
-  <meta property="og:description" content="Pricer d'options C#, allocation HRP vs Markowitz, modèles de Markov cachés : code, démos et résultats.">
+  <meta property="og:description" content="Pricer d'options en C#, allocation HRP vs Markowitz, modèles de Markov cachés : code, démos et résultats.">
   <meta property="og:image" content="https://adamyv.github.io/assets/img/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Adam Guemoune, Junior Quant Developer, C#, C++, Python">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232160b0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
-  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230057e0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="assets/css/style.css">
 
   <script type="application/ld+json">
@@ -46,249 +46,291 @@
     <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
     <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
-    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
   </svg>
 
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="#top" aria-label="Accueil">adam.guemoune</a>
+      <a class="brand" href="#top">Adam Guemoune</a>
       <nav class="nav" aria-label="Navigation principale">
         <a href="#projets">Projets</a>
+        <a class="nav-wide" href="#parcours">Parcours</a>
         <a class="nav-optional" href="#stack">Stack</a>
-        <a href="#experience">Expérience</a>
-        <a class="nav-optional" href="#qcm">QCM</a>
         <a class="nav-optional" href="#formation">Formation</a>
+        <a href="#contact">Contact</a>
       </nav>
-      <button class="theme-toggle" type="button" aria-label="Changer de thème">
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-      </button>
     </div>
   </header>
 
   <main id="contenu">
     <!-- ================= En-tête ================= -->
     <section class="hero" id="top">
-      <div class="container hero-grid">
+      <div class="container hero-inner">
         <div>
-          <p class="status">Disponible immédiatement · CDI · Paris</p>
+          <p class="hero-kicker">Disponible · CDI · Paris</p>
           <h1>Adam Guemoune</h1>
-          <p class="role">Junior Quant Developer</p>
-          <p class="langs">C# · C++ · Python</p>
-          <p class="pitch">Ingénieur EFREI Paris 2026, majeure Informatique pour la Finance. Je développe des outils de pricing, d'allocation de portefeuille et de traitement de données de marché, du modèle mathématique jusqu'au code testé.</p>
-          <div class="cta">
-            <a class="btn btn-primary" href="cv/Adam_Guemoune_CV.pdf" download><svg aria-hidden="true"><use href="#i-download"/></svg>Télécharger mon CV</a>
-            <a class="btn" href="https://github.com/AdamYv"><svg aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
-            <a class="btn" href="https://www.linkedin.com/in/adam-guemoune-b5b1a6208"><svg aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
-            <a class="btn" href="mailto:adam.guemoune@proton.me"><svg aria-hidden="true"><use href="#i-mail"/></svg>adam.guemoune@proton.me</a>
+          <p class="role">Junior Quant Developer · <span>C# · C++ · Python</span></p>
+          <p class="pitch">Ingénieur EFREI 2026, spécialisé en informatique pour la finance. J'écris des outils de pricing, d'allocation de portefeuille et de données de marché, et je les teste.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projets">Voir mes projets <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="cv/Adam_Guemoune_CV.pdf" download><svg aria-hidden="true"><use href="#i-download"/></svg>CV (français)</a>
+          </div>
+          <div class="hero-links">
+            <a href="https://github.com/AdamYv"><svg aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+            <a href="https://www.linkedin.com/in/adam-guemoune-b5b1a6208"><svg aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+            <a href="mailto:adam.guemoune@proton.me"><svg aria-hidden="true"><use href="#i-mail"/></svg>adam.guemoune@proton.me</a>
           </div>
         </div>
-        <picture>
-          <source type="image/webp" srcset="assets/img/adam-320.webp 320w, assets/img/adam-640.webp 640w" sizes="220px">
-          <img class="photo" src="assets/img/adam-320.jpg" width="220" height="220" alt="Portrait d'Adam Guemoune">
+        <picture class="portrait">
+          <source type="image/webp" srcset="assets/img/adam-320.webp 320w, assets/img/adam-640.webp 640w" sizes="(min-width: 900px) 300px, 190px">
+          <img src="assets/img/adam-320.jpg" width="300" height="300" alt="Portrait d'Adam Guemoune">
         </picture>
       </div>
     </section>
 
     <!-- ================= Projets ================= -->
-    <section id="projets" aria-labelledby="projets-titre">
+    <section class="section" id="projets" aria-labelledby="projets-titre">
       <div class="container">
-        <div class="section-head">
-          <h2 id="projets-titre">Projets phares</h2>
-          <p>Du modèle au code : chaque projet est testé et documenté.</p>
+        <div class="section-title reveal">
+          <h2 id="projets-titre">Projets</h2>
+          <p>Des modèles de finance de marché, codés de bout en bout et vérifiés par des tests.</p>
         </div>
 
-        <div class="projects">
-          <article class="card">
+        <article class="project reveal">
+          <a class="project-media" href="projets/option-pricer.html#demo" aria-label="Ouvrir la démo du pricer d'options">
+            <div class="window-bar" aria-hidden="true"><span></span><span></span><span></span><em>option-pricer · démo</em></div>
+            <img src="assets/img/shot-pricer-demo-light.webp" width="1044" height="836" loading="lazy" alt="Démo du pricer : curseurs des paramètres, prix et Grecs d'un call, courbe du prix selon le spot.">
+          </a>
+          <div class="project-body">
+            <p class="eyebrow">C# · .NET 8 · WPF · 2025</p>
             <h3>Option Pricer</h3>
-            <p class="meta">Projet personnel · C# · 2025, Grecs ajoutés en 2026</p>
-            <ul class="tags" aria-label="Technologies">
-              <li>C#</li><li>.NET 8</li><li>WPF</li><li>MathNet.Numerics</li><li>xUnit</li>
-            </ul>
-            <p class="formula" aria-label="C égale S fois N de d1, moins K fois exponentielle de moins r T, fois N de d2"><var>C</var> = <var>S</var>·N(<var>d</var><sub>1</sub>) − <var>K</var>·e<sup>−<var>rT</var></sup>·N(<var>d</var><sub>2</sub>)</p>
-            <dl>
-              <dt>Problème</dt>
-              <dd>Valoriser des options européennes, américaines et asiatiques et mesurer leur sensibilité au marché (Grecs).</dd>
-              <dt>Approche</dt>
-              <dd>Black-Scholes en formule fermée ; arbre binomial de Cox-Ross-Rubinstein avec dividende pour l'exercice anticipé ; Monte-Carlo parallèle pour l'asiatique, sur des données Alpha Vantage. Grecs en formules fermées, lus sur l'arbre ou par différences finies avec nombres aléatoires communs. 17 tests unitaires contre des valeurs de référence.</dd>
-              <dt>Ce que j'en retire</dt>
-              <dd>Tester contre des valeurs de référence a révélé deux bugs que l'interface ne montrait pas : un arbre décalé d'un cran et deux Grecs inversés.</dd>
-            </dl>
-            <div class="links">
-              <a class="btn" href="https://github.com/AdamYv/Option-Pricer"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
-              <a class="btn" href="projets/option-pricer.html#demo"><svg aria-hidden="true"><use href="#i-play"/></svg>Démo en ligne</a>
-              <a class="btn" href="projets/option-pricer.html"><svg aria-hidden="true"><use href="#i-doc"/></svg>Détails</a>
+            <p>Une application de bureau qui price des options européennes, américaines et asiatiques et calcule leurs Grecs : Black-Scholes, arbre binomial et Monte-Carlo.</p>
+            <p>En écrivant les tests unitaires, j'ai trouvé et corrigé deux bugs de calcul. J'ai aussi porté le moteur en JavaScript : la démo tourne directement dans le navigateur.</p>
+            <ul class="tags" aria-label="Technologies"><li>C#</li><li>.NET 8</li><li>WPF</li><li>xUnit</li><li>Monte-Carlo</li></ul>
+            <div class="project-links">
+              <a class="btn btn-primary btn-sm" href="projets/option-pricer.html#demo"><svg aria-hidden="true"><use href="#i-play"/></svg>Essayer la démo</a>
+              <a class="btn btn-sm" href="https://github.com/AdamYv/Option-Pricer"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+              <a class="btn btn-sm" href="projets/option-pricer.html">Détails</a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <article class="card">
+        <article class="project flip reveal">
+          <a class="project-media" href="projets/hrp.html" aria-label="Voir le projet HRP vs Markowitz">
+            <div class="window-bar" aria-hidden="true"><span></span><span></span><span></span><em>dendrogram.png</em></div>
+            <img src="assets/img/shot-hrp-dendrogram.webp" width="1200" height="682" loading="lazy" alt="Dendrogramme du clustering hiérarchique de 12 actifs : obligations, or, actions technologiques et marchés internationaux regroupés par corrélation.">
+          </a>
+          <div class="project-body">
+            <p class="eyebrow">Python · pandas · SciPy · 2025</p>
             <h3>Hierarchical Risk Parity vs Markowitz</h3>
-            <p class="meta">Projet personnel · Python · sept.–nov. 2025, backtest ajouté en 2026</p>
-            <ul class="tags" aria-label="Technologies">
-              <li>Python</li><li>pandas</li><li>NumPy</li><li>SciPy</li><li>yfinance</li><li>pytest</li>
-            </ul>
-            <dl>
-              <dt>Problème</dt>
-              <dd>Markowitz inverse une matrice de covariance estimée avec du bruit, d'où des allocations instables et concentrées. HRP répartit le risque en suivant la structure hiérarchique des corrélations.</dd>
-              <dt>Approche</dt>
-              <dd>Distance de corrélation, clustering hiérarchique, quasi-diagonalisation et bissection récursive (López de Prado, 2016). Backtest walk-forward hors échantillon : estimation sur 252 jours, rebalancement tous les 21 jours.</dd>
-              <dt>Résultat (2016–2025, 12 actifs)</dt>
-              <dd>HRP : <strong>5,10 %/an</strong>, Sharpe <strong>0,82</strong>, contre 3,05 % et 0,61 pour Markowitz variance minimale, 4,48 % et 0,38 pour Markowitz Sharpe maximal. Le simple 1/N fait mieux sur la période.</dd>
-              <dt>Ce que j'en retire</dt>
-              <dd>Un protocole sans biais d'anticipation compte plus que le chiffre final : le classement change avec l'univers d'actifs, et une allocation naïve peut gagner.</dd>
-            </dl>
-            <div class="links">
-              <a class="btn" href="https://github.com/AdamYv/Hierarchical-Clustering-Asset"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
-              <a class="btn" href="projets/hrp.html"><svg aria-hidden="true"><use href="#i-doc"/></svg>Détails</a>
+            <p>J'ai codé Hierarchical Risk Parity (López de Prado) et je l'ai comparé à Markowitz sur un backtest hors échantillon de 2016 à 2025.</p>
+            <p>HRP fait mieux que les deux versions de Markowitz. Un simple portefeuille équipondéré fait encore mieux sur la période, et je l'indique dans les résultats.</p>
+            <ul class="tags" aria-label="Technologies"><li>Python</li><li>pandas</li><li>NumPy</li><li>SciPy</li><li>pytest</li></ul>
+            <div class="project-links">
+              <a class="btn btn-primary btn-sm" href="projets/hrp.html">Voir les résultats</a>
+              <a class="btn btn-sm" href="https://github.com/AdamYv/Hierarchical-Clustering-Asset"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <article class="card">
+        <article class="project reveal">
+          <a class="project-media" href="projets/hmm.html" aria-label="Voir le projet HMM">
+            <div class="window-bar" aria-hidden="true"><span></span><span></span><span></span><em>convergence_plot.png</em></div>
+            <img src="assets/img/hmm-convergence.webp" width="1000" height="600" loading="lazy" alt="Convergence de l'algorithme de Baum-Welch : la log-vraisemblance se stabilise en une dizaine d'itérations.">
+          </a>
+          <div class="project-body">
+            <p class="eyebrow">Python · Numba · 2026</p>
             <h3>Modèles de Markov cachés</h3>
-            <p class="meta">Projet personnel · Python · mars 2026</p>
-            <ul class="tags" aria-label="Technologies">
-              <li>Python</li><li>NumPy</li><li>Numba</li><li>pandas</li><li>Matplotlib</li>
-            </ul>
-            <dl>
-              <dt>Problème</dt>
-              <dd>Retrouver des régimes cachés (phases de marché) à partir de la seule série observée.</dd>
-              <dt>Approche</dt>
-              <dd>HMM à émissions gaussiennes codé sans bibliothèque de HMM : Forward-Backward, Baum-Welch (EM) et Viterbi, compilés avec Numba. Évalué sur des séries simulées dont les régimes sont connus, avec une étude de la précision du décodage selon l'amplitude du signal et le bruit.</dd>
-              <dt>Ce que j'en retire</dt>
-              <dd>Écrire Baum-Welch et Viterbi à la main, puis mesurer quand le décodage échoue, apprend les limites du modèle autant que son fonctionnement.</dd>
-            </dl>
-            <div class="links">
-              <a class="btn" href="https://github.com/AdamYv/HMM"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
-              <a class="btn" href="projets/hmm.html"><svg aria-hidden="true"><use href="#i-doc"/></svg>Détails</a>
+            <p>Un modèle de Markov caché écrit à la main, sans bibliothèque dédiée : Forward-Backward, Baum-Welch et Viterbi, accélérés avec Numba.</p>
+            <p>Je l'ai testé sur des séries simulées dont les régimes sont connus, pour mesurer quand il les retrouve et quand il échoue.</p>
+            <ul class="tags" aria-label="Technologies"><li>Python</li><li>NumPy</li><li>Numba</li><li>Matplotlib</li></ul>
+            <div class="project-links">
+              <a class="btn btn-primary btn-sm" href="projets/hmm.html">Détails</a>
+              <a class="btn btn-sm" href="https://github.com/AdamYv/HMM"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <article class="card card-pro">
+        <div class="collabs-title reveal">
+          <h3>Projets en collaboration avec des entreprises</h3>
+          <p>Code non public : je décris uniquement ce que j'ai développé.</p>
+        </div>
+        <div class="collabs">
+          <article class="collab reveal">
+            <p class="meta"><span>MindPlug</span><span>·</span><span>nov. 2025 – fév. 2026</span><span class="badge">code non public</span></p>
             <h3>Application de backtesting</h3>
-            <p class="meta">Collaboration MindPlug · nov. 2025 – fév. 2026 · <span class="badge">code non public</span></p>
-            <ul class="tags" aria-label="Technologies">
-              <li>C#</li><li>.NET</li><li>WPF</li><li>SQL</li><li>Python</li><li>SciPy</li>
-            </ul>
-            <dl>
-              <dt>Ce que j'ai développé</dt>
-              <dd>Des générateurs de données de marché synthétiques fondés sur les modèles de Heston et CIR, pour tester des stratégies en simulation, et un pipeline de lecture et de traitement des fichiers binaires (.bin) de données de marché qui alimente le moteur de backtest.</dd>
-            </dl>
+            <p>Générateurs de données de marché synthétiques fondés sur les modèles de Heston et CIR, pour tester des stratégies en simulation, et pipeline de lecture des fichiers binaires de marché qui alimente le moteur de backtest.</p>
+            <ul class="tags" aria-label="Technologies"><li>C#</li><li>.NET</li><li>WPF</li><li>SQL</li><li>Python</li><li>SciPy</li></ul>
           </article>
-
-          <article class="card card-pro">
+          <article class="collab reveal">
+            <p class="meta"><span>Euronext</span><span>·</span><span>nov. 2025 – janv. 2026</span><span class="badge">code non public</span></p>
             <h3>Outil de surveillance réseau</h3>
-            <p class="meta">Collaboration Euronext · nov. 2025 – janv. 2026 · <span class="badge">code non public</span></p>
-            <ul class="tags" aria-label="Technologies">
-              <li>C++</li><li>Qt 6</li><li>Python</li><li>Flask</li>
-            </ul>
-            <dl>
-              <dt>Ce que j'ai développé</dt>
-              <dd>Un outil Qt 6 qui surveille les serveurs de l'infrastructure du matching engine et bascule automatiquement sur un serveur de secours en cas de panne, pour garantir la haute disponibilité. Stack : C++, Qt 6, Python/Flask, hébergement cloud.</dd>
-            </dl>
+            <p>Un outil Qt 6 qui surveille les serveurs de l'infrastructure du matching engine et bascule automatiquement sur un serveur de secours en cas de panne, pour garantir la haute disponibilité.</p>
+            <ul class="tags" aria-label="Technologies"><li>C++</li><li>Qt 6</li><li>Python</li><li>Flask</li></ul>
           </article>
         </div>
 
-        <p class="note" style="margin-top:18px">Projets académiques : plateforme de backtesting C#/.NET/WPF sur l'API Alpha Vantage (RSI, ratio de Sharpe) · modèle multi-agents de risque systémique et de bulles spéculatives (Python, PyTorch) · prédiction du prix de l'électricité (Python, pandas) · classification d'images CIFAR-10 par CNN (TensorFlow/Keras, 85 % de précision).</p>
+        <p class="academic reveal"><strong>Projets académiques :</strong> plateforme de backtesting C#/.NET/WPF sur l'API Alpha Vantage (RSI, ratio de Sharpe) · modèle multi-agents de risque systémique (Python, PyTorch) · prédiction du prix de l'électricité (Python) · classification d'images CIFAR-10 par CNN (TensorFlow/Keras).</p>
       </div>
     </section>
 
-    <!-- ================= Stack ================= -->
-    <section id="stack" aria-labelledby="stack-titre">
+    <!-- ================= Parcours ================= -->
+    <section class="section section-alt" id="parcours" aria-labelledby="parcours-titre">
       <div class="container">
-        <div class="section-head"><h2 id="stack-titre">Stack technique</h2></div>
-        <div class="stack">
-          <div class="card">
-            <h3>Langages</h3>
-            <ul class="tags"><li>C#</li><li>Python</li><li>C++</li><li>SQL</li><li>C</li></ul>
-          </div>
-          <div class="card">
-            <h3>Finance et quant</h3>
-            <ul class="tags"><li>Black-Scholes</li><li>Arbres binomiaux</li><li>Monte-Carlo</li><li>Grecs</li><li>Heston</li><li>CIR</li><li>Markowitz</li><li>HRP</li><li>HMM</li><li>Backtesting</li></ul>
-          </div>
-          <div class="card">
-            <h3>Données et calcul</h3>
-            <ul class="tags"><li>pandas</li><li>NumPy</li><li>SciPy</li><li>scikit-learn</li><li>Numba</li><li>PostgreSQL</li><li>MySQL</li><li>PyTorch</li><li>TensorFlow</li></ul>
-          </div>
-          <div class="card">
-            <h3>Applications et outils</h3>
-            <ul class="tags"><li>.NET</li><li>WPF</li><li>Qt 6</li><li>FastAPI</li><li>Django</li><li>Flask</li><li>Docker</li><li>GitHub Actions</li><li>pytest</li><li>xUnit</li><li>Git</li><li>Linux</li><li>Claude Code</li></ul>
-          </div>
+        <div class="section-title reveal">
+          <h2 id="parcours-titre">Parcours</h2>
+          <p>Ce que j'ai construit en stage et en collaboration.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= Expérience ================= -->
-    <section id="experience" aria-labelledby="experience-titre">
-      <div class="container">
-        <div class="section-head"><h2 id="experience-titre">Expérience</h2></div>
         <ol class="timeline">
-          <li>
-            <div class="row"><h3>Ingénieur Full Stack, stage de fin d'études</h3><span class="when">mai – oct. 2026</span></div>
+          <li class="reveal">
+            <span class="step" aria-hidden="true">01</span>
+            <span class="when">mai – oct. 2026 · stage de fin d'études, 6 mois</span>
+            <h3>Ingénieur Full Stack</h3>
             <p class="where">MVO Fiducia · Genève, Suisse</p>
-            <p>Conception et mise en production, seul, de Copilfid : un logiciel qui analyse la comptabilité des clients d'une fiduciaire (ERP Bexio) et produit des rapports d'anomalies commentés par IA. 736 tests automatisés, déploiement continu ; Python, FastAPI, PostgreSQL, Docker.</p>
+            <p>J'ai conçu et mis en production, seul, Copilfid : un logiciel qui analyse la comptabilité des clients d'une fiduciaire (ERP Bexio) et produit des rapports d'anomalies commentés par IA. Tests automatisés, déploiement continu, hébergement en Suisse. Python, FastAPI, PostgreSQL, Docker.</p>
           </li>
-          <li>
-            <div class="row"><h3>Application de backtesting</h3><span class="when">nov. 2025 – fév. 2026</span></div>
-            <p class="where">Collaboration MindPlug</p>
-            <p>Générateurs de données de marché (Heston, CIR) et pipeline de lecture des fichiers binaires de marché pour le moteur de backtest. C#, .NET, Python.</p>
+          <li class="reveal">
+            <span class="step" aria-hidden="true">02</span>
+            <span class="when">nov. 2025 – fév. 2026 · collaboration</span>
+            <h3>Application de backtesting</h3>
+            <p class="where">MindPlug</p>
+            <p>Générateurs de données de marché (Heston, CIR) et lecture des fichiers binaires de marché pour un moteur de backtest. C#, .NET, Python.</p>
           </li>
-          <li>
-            <div class="row"><h3>Développeur web et données, stage</h3><span class="when">juin – nov. 2025</span></div>
+          <li class="reveal">
+            <span class="step" aria-hidden="true">03</span>
+            <span class="when">juin – nov. 2025 · stage</span>
+            <h3>Développeur web et données</h3>
             <p class="where">Le Travailleur · Montreuil</p>
-            <p>Logiciel de gestion des stocks en temps réel (Django/Dash, PostgreSQL) et site web de l'entreprise.</p>
+            <p>Logiciel de gestion des stocks en temps réel (Django/Dash, PostgreSQL) et site web de l'entreprise, en lien direct avec le dirigeant.</p>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- ================= QCM ================= -->
-    <section id="qcm" aria-labelledby="qcm-titre">
+    <!-- ================= Stack ================= -->
+    <section class="section" id="stack" aria-labelledby="stack-titre">
       <div class="container">
-        <div class="card qcm">
-          <div>
-            <p class="eyebrow">Révision</p>
-            <h2 id="qcm-titre">QCM : produits dérivés et gestion de portefeuille</h2>
-            <p style="margin:0;color:var(--text-2)">40 questions (en anglais), deux modes : examen, avec le score et la correction à la fin, ou apprentissage, avec la correction après chaque réponse.</p>
-          </div>
-          <a class="btn btn-primary" href="qcm/">Lancer le QCM</a>
+        <div class="section-title reveal">
+          <h2 id="stack-titre">Stack technique</h2>
+          <p>Les outils que j'utilise sur mes projets et en stage.</p>
+        </div>
+
+        <div class="stack-group reveal">
+          <h3>Langages et frameworks</h3>
+          <ul class="logo-grid">
+            <li><span class="mono-logo" aria-hidden="true">C#</span>C#</li>
+            <li><img src="assets/logos/dotnet.svg" alt="" width="32" height="32">.NET / WPF</li>
+            <li><img src="assets/logos/cplusplus.svg" alt="" width="32" height="32">C++</li>
+            <li><img src="assets/logos/qt.svg" alt="" width="32" height="32">Qt 6</li>
+            <li><img src="assets/logos/python.svg" alt="" width="32" height="32">Python</li>
+            <li><img src="assets/logos/fastapi.svg" alt="" width="32" height="32">FastAPI</li>
+            <li><img src="assets/logos/django.svg" alt="" width="32" height="32">Django</li>
+            <li><img src="assets/logos/flask.svg" alt="" width="32" height="32">Flask</li>
+          </ul>
+        </div>
+
+        <div class="stack-group reveal">
+          <h3>Données et calcul</h3>
+          <ul class="logo-grid">
+            <li><img src="assets/logos/pandas.svg" alt="" width="32" height="32">pandas</li>
+            <li><img src="assets/logos/numpy.svg" alt="" width="32" height="32">NumPy</li>
+            <li><img src="assets/logos/scipy.svg" alt="" width="32" height="32">SciPy</li>
+            <li><img src="assets/logos/scikitlearn.svg" alt="" width="32" height="32">scikit-learn</li>
+            <li><img src="assets/logos/numba.svg" alt="" width="32" height="32">Numba</li>
+            <li><img src="assets/logos/pytorch.svg" alt="" width="32" height="32">PyTorch</li>
+            <li><img src="assets/logos/tensorflow.svg" alt="" width="32" height="32">TensorFlow</li>
+          </ul>
+        </div>
+
+        <div class="stack-group reveal">
+          <h3>Bases de données et outils</h3>
+          <ul class="logo-grid">
+            <li><img src="assets/logos/postgresql.svg" alt="" width="32" height="32">PostgreSQL</li>
+            <li><img src="assets/logos/mysql.svg" alt="" width="32" height="32">MySQL</li>
+            <li><img src="assets/logos/git.svg" alt="" width="32" height="32">Git</li>
+            <li><img src="assets/logos/linux.svg" alt="" width="32" height="32">Linux</li>
+            <li><img src="assets/logos/docker.svg" alt="" width="32" height="32">Docker</li>
+            <li><img src="assets/logos/githubactions.svg" alt="" width="32" height="32">GitHub Actions</li>
+            <li><img src="assets/logos/jupyter.svg" alt="" width="32" height="32">Jupyter</li>
+            <li><img src="assets/logos/claude.svg" alt="" width="32" height="32">Claude Code</li>
+          </ul>
+        </div>
+
+        <div class="stack-group reveal">
+          <h3>Finance quantitative</h3>
+          <ul class="chips">
+            <li>Black-Scholes</li><li>Arbres binomiaux</li><li>Monte-Carlo</li><li>Grecs</li><li>Heston</li><li>CIR</li><li>Markowitz</li><li>Hierarchical Risk Parity</li><li>Modèles de Markov cachés</li><li>Backtesting</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- ================= Formation ================= -->
-    <section id="formation" aria-labelledby="formation-titre">
+    <section class="section section-alt" id="formation" aria-labelledby="formation-titre">
       <div class="container">
-        <div class="section-head"><h2 id="formation-titre">Formation et plus</h2></div>
-        <div class="two-col">
-          <ol class="timeline">
-            <li>
-              <div class="row"><h3>Diplôme d'ingénieur, Informatique pour la Finance</h3><span class="when">2024 – 2026</span></div>
-              <p class="where">EFREI Paris</p>
-              <p>Finance de marché, mathématiques appliquées, produits dérivés, valorisation d'options.</p>
-            </li>
-            <li>
-              <div class="row"><h3>Cycle préparatoire intégré</h3><span class="when">2021 – 2024</span></div>
-              <p class="where">EFREI Paris · semestre international à la VSB – TU Ostrava (République tchèque, 2023–2024)</p>
-            </li>
-          </ol>
-          <ol class="timeline">
-            <li>
-              <div class="row"><h3>Langues</h3></div>
-              <p>Français (langue maternelle) · anglais courant (TOEIC 895)</p>
-            </li>
-            <li>
-              <div class="row"><h3>Formateur informatique bénévole</h3><span class="when">depuis 2026</span></div>
-              <p class="where">Armée du Salut</p>
-              <p>Cours hebdomadaires pour des femmes hébergées dans un foyer.</p>
-            </li>
-            <li>
-              <div class="row"><h3>Formateur informatique bénévole</h3><span class="when">pendant mes études</span></div>
-              <p class="where">FAP EFREI</p>
-              <p>Initiation à l'informatique pour des seniors.</p>
-            </li>
-          </ol>
+        <div class="section-title reveal">
+          <h2 id="formation-titre">Formation</h2>
+        </div>
+        <div class="schools">
+          <article class="school reveal">
+            <img class="school-logo" src="assets/logos/efrei.svg" width="200" height="65" alt="Logo de l'EFREI Paris">
+            <span class="when">2021 – 2026</span>
+            <h3>Diplôme d'ingénieur, majeure Informatique pour la Finance</h3>
+            <p>EFREI Paris. Finance de marché, mathématiques appliquées, produits dérivés et valorisation d'options, après un cycle préparatoire intégré (2021–2024).</p>
+          </article>
+          <article class="school reveal">
+            <img class="school-logo" src="assets/logos/vsb.svg" width="164" height="60" alt="Logo de la VSB – Technical University of Ostrava">
+            <span class="when">2023 – 2024</span>
+            <h3>Semestre international</h3>
+            <p>VSB – Technical University of Ostrava, République tchèque.</p>
+          </article>
+        </div>
+        <div class="extras">
+          <article class="extra reveal">
+            <h3>Langues</h3>
+            <p>Français, langue maternelle. Anglais courant (TOEIC 895).</p>
+          </article>
+          <article class="extra reveal">
+            <span class="when">depuis 2026</span>
+            <h3>Formateur bénévole, Armée du Salut</h3>
+            <p>Cours d'informatique hebdomadaires pour des femmes hébergées dans un foyer.</p>
+          </article>
+          <article class="extra reveal">
+            <span class="when">pendant mes études</span>
+            <h3>Formateur bénévole, FAP EFREI</h3>
+            <p>Initiation à l'informatique pour des seniors.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= QCM ================= -->
+    <section class="section" id="qcm" aria-labelledby="qcm-titre" style="padding-bottom:0">
+      <div class="container">
+        <div class="banner reveal">
+          <div>
+            <p class="eyebrow">Révision</p>
+            <h2 id="qcm-titre">QCM : produits dérivés et gestion de portefeuille</h2>
+            <p>40 questions en anglais, en mode examen (correction à la fin) ou apprentissage (correction après chaque réponse).</p>
+          </div>
+          <a class="btn btn-primary" href="qcm/">Lancer le QCM <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Contact ================= -->
+    <section class="section contact" id="contact" aria-labelledby="contact-titre">
+      <div class="container reveal">
+        <div class="section-title" style="margin-bottom:24px">
+          <h2 id="contact-titre">Contact</h2>
+        </div>
+        <p>Je cherche un premier poste en CDI en finance de marché, à Paris. Écrivez-moi, je réponds rapidement.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:adam.guemoune@proton.me"><svg aria-hidden="true"><use href="#i-mail"/></svg>adam.guemoune@proton.me</a>
+          <a class="btn" href="https://www.linkedin.com/in/adam-guemoune-b5b1a6208"><svg aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+          <a class="btn" href="cv/Adam_Guemoune_CV.pdf" download><svg aria-hidden="true"><use href="#i-download"/></svg>CV (français)</a>
         </div>
       </div>
     </section>
@@ -296,8 +338,8 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span>© 2026 Adam Guemoune · <a href="mailto:adam.guemoune@proton.me">adam.guemoune@proton.me</a></span>
-      <span>Site statique, <a href="https://github.com/AdamYv/AdamYv.github.io">code source sur GitHub</a></span>
+      <span>© 2026 Adam Guemoune</span>
+      <span>Site statique · <a href="https://github.com/AdamYv/AdamYv.github.io">code source</a></span>
     </div>
   </footer>
 

@@ -1,29 +1,18 @@
-// Bascule du thème clair / sombre. Le choix est mémorisé localement ;
-// sans choix enregistré, la page suit le réglage du système.
+// Apparition des sections au défilement. Sans JavaScript (ou avec
+// « réduire les animations »), tout le contenu reste visible.
 (function () {
-  var root = document.documentElement;
-  var button = document.querySelector(".theme-toggle");
-  if (!button) return;
-
-  function current() {
-    var forced = root.getAttribute("data-theme");
-    if (forced) return forced;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  var items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    items.forEach(function (el) { el.classList.add("is-visible"); });
+    return;
   }
-
-  function label() {
-    var next = current() === "dark" ? "clair" : "sombre";
-    button.setAttribute("aria-label", "Passer au thème " + next);
-    button.setAttribute("title", "Passer au thème " + next);
-  }
-
-  button.addEventListener("click", function () {
-    var next = current() === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    try { localStorage.setItem("theme", next); } catch (e) { /* stockage indisponible */ }
-    label();
-    document.dispatchEvent(new CustomEvent("themechange"));
-  });
-
-  label();
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+  items.forEach(function (el) { observer.observe(el); });
 })();

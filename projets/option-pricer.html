@@ -13,24 +13,22 @@
   <meta property="og:description" content="Black-Scholes, arbre binomial CRR, Monte-Carlo et Grecs, avec une démo interactive.">
   <meta property="og:image" content="https://adamyv.github.io/assets/img/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232160b0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
-  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230057e0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.classList.add("js")</script>
+  <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="../">adam.guemoune</a>
+      <a class="brand" href="../">Adam Guemoune</a>
       <nav class="nav" aria-label="Navigation principale">
         <a href="../#projets">Projets</a>
         <a href="#demo">Démo</a>
         <a href="https://github.com/AdamYv/Option-Pricer">Code</a>
       </nav>
-      <button class="theme-toggle" type="button" aria-label="Changer de thème">
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-      </button>
     </div>
   </header>
 
@@ -39,14 +37,14 @@
       <p class="breadcrumb"><a href="../#projets">← Projets</a></p>
       <p class="eyebrow">Projet personnel · C# · .NET 8 · WPF</p>
       <h1>Option Pricer</h1>
-      <p class="pitch" style="color:var(--text-2);max-width:65ch">Une application de bureau qui valorise des options européennes, américaines et asiatiques et calcule leurs Grecs. Cette page en reprend les moteurs européen et américain en JavaScript pour les tester directement dans le navigateur.</p>
+      <p class="lead">Une application de bureau qui valorise des options européennes, américaines et asiatiques et calcule leurs Grecs. Cette page en reprend les moteurs européen et américain en JavaScript pour les tester directement dans le navigateur.</p>
       <div class="cta">
         <a class="btn" href="https://github.com/AdamYv/Option-Pricer">Voir le code sur GitHub</a>
       </div>
     </div>
 
     <!-- ================= Démo ================= -->
-    <section id="demo" aria-labelledby="demo-titre">
+    <section class="block" id="demo" aria-labelledby="demo-titre">
       <div class="container">
         <div class="section-head">
           <h2 id="demo-titre">Démo interactive</h2>
@@ -139,7 +137,7 @@
     </section>
 
     <!-- ================= Détails ================= -->
-    <section aria-labelledby="details-titre">
+    <section class="block" aria-labelledby="details-titre">
       <div class="container prose">
         <h2 id="details-titre">Contexte</h2>
         <p>Projet personnel réalisé en mars 2025, pendant ma majeure Informatique pour la Finance ; Grecs et tests ajoutés en novembre 2026. L'utilisateur choisit le type d'option, saisit ses paramètres et obtient le prix et les Grecs. Pour l'option asiatique, le cours et la volatilité historique du sous-jacent sont récupérés via l'API Alpha Vantage.</p>
