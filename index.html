@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adam Guemoune – Junior Quant Developer (C# · C++ · Python)</title>
+  <meta name="description" content="Portfolio d'Adam Guemoune, ingénieur EFREI 2026 en informatique pour la finance : pricer d'options C#, allocation HRP vs Markowitz, modèles de Markov cachés. Code, démos et résultats.">
+  <meta name="author" content="Adam Guemoune">
+  <link rel="canonical" href="https://adamyv.github.io/">
+  <meta name="theme-color" content="#111316" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fcfcfb" media="(prefers-color-scheme: light)">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://adamyv.github.io/">
+  <meta property="og:title" content="Adam Guemoune – Junior Quant Developer">
+  <meta property="og:description" content="Pricer d'options C#, allocation HRP vs Markowitz, modèles de Markov cachés : code, démos et résultats.">
+  <meta property="og:image" content="https://adamyv.github.io/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Adam Guemoune, Junior Quant Developer, C#, C++, Python">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232160b0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Adam Guemoune",
+    "jobTitle": "Junior Quant Developer",
+    "url": "https://adamyv.github.io/",
+    "email": "mailto:adam.guemoune@proton.me",
+    "alumniOf": "EFREI Paris",
+    "sameAs": ["https://github.com/AdamYv", "https://www.linkedin.com/in/adam-guemoune-b5b1a6208"]
+  }
+  </script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="#top" aria-label="Accueil">adam.guemoune</a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#projets">Projets</a>
+        <a class="nav-optional" href="#stack">Stack</a>
+        <a href="#experience">Expérience</a>
+        <a class="nav-optional" href="#qcm">QCM</a>
+        <a class="nav-optional" href="#formation">Formation</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Changer de thème">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <!-- ================= En-tête ================= -->
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <p class="status">Disponible immédiatement · CDI · Paris</p>
+          <h1>Adam Guemoune</h1>
+          <p class="role">Junior Quant Developer</p>
+          <p class="langs">C# · C++ · Python</p>
+          <p class="pitch">Ingénieur EFREI Paris 2026, majeure Informatique pour la Finance. Je développe des outils de pricing, d'allocation de portefeuille et de traitement de données de marché, du modèle mathématique jusqu'au code testé.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="cv/Adam_Guemoune_CV.pdf" download><svg aria-hidden="true"><use href="#i-download"/></svg>Télécharger mon CV</a>
+            <a class="btn" href="https://github.com/AdamYv"><svg aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/adam-guemoune-b5b1a6208"><svg aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+            <a class="btn" href="mailto:adam.guemoune@proton.me"><svg aria-hidden="true"><use href="#i-mail"/></svg>adam.guemoune@proton.me</a>
+          </div>
+        </div>
+        <picture>
+          <source type="image/webp" srcset="assets/img/adam-320.webp 320w, assets/img/adam-640.webp 640w" sizes="220px">
+          <img class="photo" src="assets/img/adam-320.jpg" width="220" height="220" alt="Portrait d'Adam Guemoune">
+        </picture>
+      </div>
+    </section>
+
+    <!-- ================= Projets ================= -->
+    <section id="projets" aria-labelledby="projets-titre">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="projets-titre">Projets phares</h2>
+          <p>Du modèle au code : chaque projet est testé et documenté.</p>
+        </div>
+
+        <div class="projects">
+          <article class="card">
+            <h3>Option Pricer</h3>
+            <p class="meta">Projet personnel · C# · 2025, Grecs ajoutés en 2026</p>
+            <ul class="tags" aria-label="Technologies">
+              <li>C#</li><li>.NET 8</li><li>WPF</li><li>MathNet.Numerics</li><li>xUnit</li>
+            </ul>
+            <p class="formula" aria-label="C égale S fois N de d1, moins K fois exponentielle de moins r T, fois N de d2"><var>C</var> = <var>S</var>·N(<var>d</var><sub>1</sub>) − <var>K</var>·e<sup>−<var>rT</var></sup>·N(<var>d</var><sub>2</sub>)</p>
+            <dl>
+              <dt>Problème</dt>
+              <dd>Valoriser des options européennes, américaines et asiatiques et mesurer leur sensibilité au marché (Grecs).</dd>
+              <dt>Approche</dt>
+              <dd>Black-Scholes en formule fermée ; arbre binomial de Cox-Ross-Rubinstein avec dividende pour l'exercice anticipé ; Monte-Carlo parallèle pour l'asiatique, sur des données Alpha Vantage. Grecs en formules fermées, lus sur l'arbre ou par différences finies avec nombres aléatoires communs. 17 tests unitaires contre des valeurs de référence.</dd>
+              <dt>Ce que j'en retire</dt>
+              <dd>Tester contre des valeurs de référence a révélé deux bugs que l'interface ne montrait pas : un arbre décalé d'un cran et deux Grecs inversés.</dd>
+            </dl>
+            <div class="links">
+              <a class="btn" href="https://github.com/AdamYv/Option-Pricer"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+              <a class="btn" href="projets/option-pricer.html#demo"><svg aria-hidden="true"><use href="#i-play"/></svg>Démo en ligne</a>
+              <a class="btn" href="projets/option-pricer.html"><svg aria-hidden="true"><use href="#i-doc"/></svg>Détails</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Hierarchical Risk Parity vs Markowitz</h3>
+            <p class="meta">Projet personnel · Python · sept.–nov. 2025, backtest ajouté en 2026</p>
+            <ul class="tags" aria-label="Technologies">
+              <li>Python</li><li>pandas</li><li>NumPy</li><li>SciPy</li><li>yfinance</li><li>pytest</li>
+            </ul>
+            <dl>
+              <dt>Problème</dt>
+              <dd>Markowitz inverse une matrice de covariance estimée avec du bruit, d'où des allocations instables et concentrées. HRP répartit le risque en suivant la structure hiérarchique des corrélations.</dd>
+              <dt>Approche</dt>
+              <dd>Distance de corrélation, clustering hiérarchique, quasi-diagonalisation et bissection récursive (López de Prado, 2016). Backtest walk-forward hors échantillon : estimation sur 252 jours, rebalancement tous les 21 jours.</dd>
+              <dt>Résultat (2016–2025, 12 actifs)</dt>
+              <dd>HRP : <strong>5,10 %/an</strong>, Sharpe <strong>0,82</strong>, contre 3,05 % et 0,61 pour Markowitz variance minimale, 4,48 % et 0,38 pour Markowitz Sharpe maximal. Le simple 1/N fait mieux sur la période.</dd>
+              <dt>Ce que j'en retire</dt>
+              <dd>Un protocole sans biais d'anticipation compte plus que le chiffre final : le classement change avec l'univers d'actifs, et une allocation naïve peut gagner.</dd>
+            </dl>
+            <div class="links">
+              <a class="btn" href="https://github.com/AdamYv/Hierarchical-Clustering-Asset"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+              <a class="btn" href="projets/hrp.html"><svg aria-hidden="true"><use href="#i-doc"/></svg>Détails</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Modèles de Markov cachés</h3>
+            <p class="meta">Projet personnel · Python · mars 2026</p>
+            <ul class="tags" aria-label="Technologies">
+              <li>Python</li><li>NumPy</li><li>Numba</li><li>pandas</li><li>Matplotlib</li>
+            </ul>
+            <dl>
+              <dt>Problème</dt>
+              <dd>Retrouver des régimes cachés (phases de marché) à partir de la seule série observée.</dd>
+              <dt>Approche</dt>
+              <dd>HMM à émissions gaussiennes codé sans bibliothèque de HMM : Forward-Backward, Baum-Welch (EM) et Viterbi, compilés avec Numba. Évalué sur des séries simulées dont les régimes sont connus, avec une étude de la précision du décodage selon l'amplitude du signal et le bruit.</dd>
+              <dt>Ce que j'en retire</dt>
+              <dd>Écrire Baum-Welch et Viterbi à la main, puis mesurer quand le décodage échoue, apprend les limites du modèle autant que son fonctionnement.</dd>
+            </dl>
+            <div class="links">
+              <a class="btn" href="https://github.com/AdamYv/HMM"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+              <a class="btn" href="projets/hmm.html"><svg aria-hidden="true"><use href="#i-doc"/></svg>Détails</a>
+            </div>
+          </article>
+
+          <article class="card card-pro">
+            <h3>Application de backtesting</h3>
+            <p class="meta">Collaboration MindPlug · nov. 2025 – fév. 2026 · <span class="badge">code non public</span></p>
+            <ul class="tags" aria-label="Technologies">
+              <li>C#</li><li>.NET</li><li>WPF</li><li>SQL</li><li>Python</li><li>SciPy</li>
+            </ul>
+            <dl>
+              <dt>Ce que j'ai développé</dt>
+              <dd>Des générateurs de données de marché synthétiques fondés sur les modèles de Heston et CIR, pour tester des stratégies en simulation, et un pipeline de lecture et de traitement des fichiers binaires (.bin) de données de marché qui alimente le moteur de backtest.</dd>
+            </dl>
+          </article>
+
+          <article class="card card-pro">
+            <h3>Outil de surveillance réseau</h3>
+            <p class="meta">Collaboration Euronext · nov. 2025 – janv. 2026 · <span class="badge">code non public</span></p>
+            <ul class="tags" aria-label="Technologies">
+              <li>C++</li><li>Qt 6</li><li>Python</li><li>Flask</li>
+            </ul>
+            <dl>
+              <dt>Ce que j'ai développé</dt>
+              <dd>Un outil Qt 6 qui surveille les serveurs de l'infrastructure du matching engine et bascule automatiquement sur un serveur de secours en cas de panne, pour garantir la haute disponibilité. Stack : C++, Qt 6, Python/Flask, hébergement cloud.</dd>
+            </dl>
+          </article>
+        </div>
+
+        <p class="note" style="margin-top:18px">Projets académiques : plateforme de backtesting C#/.NET/WPF sur l'API Alpha Vantage (RSI, ratio de Sharpe) · modèle multi-agents de risque systémique et de bulles spéculatives (Python, PyTorch) · prédiction du prix de l'électricité (Python, pandas) · classification d'images CIFAR-10 par CNN (TensorFlow/Keras, 85 % de précision).</p>
+      </div>
+    </section>
+
+    <!-- ================= Stack ================= -->
+    <section id="stack" aria-labelledby="stack-titre">
+      <div class="container">
+        <div class="section-head"><h2 id="stack-titre">Stack technique</h2></div>
+        <div class="stack">
+          <div class="card">
+            <h3>Langages</h3>
+            <ul class="tags"><li>C#</li><li>Python</li><li>C++</li><li>SQL</li><li>C</li></ul>
+          </div>
+          <div class="card">
+            <h3>Finance et quant</h3>
+            <ul class="tags"><li>Black-Scholes</li><li>Arbres binomiaux</li><li>Monte-Carlo</li><li>Grecs</li><li>Heston</li><li>CIR</li><li>Markowitz</li><li>HRP</li><li>HMM</li><li>Backtesting</li></ul>
+          </div>
+          <div class="card">
+            <h3>Données et calcul</h3>
+            <ul class="tags"><li>pandas</li><li>NumPy</li><li>SciPy</li><li>scikit-learn</li><li>Numba</li><li>PostgreSQL</li><li>MySQL</li><li>PyTorch</li><li>TensorFlow</li></ul>
+          </div>
+          <div class="card">
+            <h3>Applications et outils</h3>
+            <ul class="tags"><li>.NET</li><li>WPF</li><li>Qt 6</li><li>FastAPI</li><li>Django</li><li>Flask</li><li>Docker</li><li>GitHub Actions</li><li>pytest</li><li>xUnit</li><li>Git</li><li>Linux</li><li>Claude Code</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Expérience ================= -->
+    <section id="experience" aria-labelledby="experience-titre">
+      <div class="container">
+        <div class="section-head"><h2 id="experience-titre">Expérience</h2></div>
+        <ol class="timeline">
+          <li>
+            <div class="row"><h3>Ingénieur Full Stack, stage de fin d'études</h3><span class="when">mai – oct. 2026</span></div>
+            <p class="where">MVO Fiducia · Genève, Suisse</p>
+            <p>Conception et mise en production, seul, de Copilfid : un logiciel qui analyse la comptabilité des clients d'une fiduciaire (ERP Bexio) et produit des rapports d'anomalies commentés par IA. 736 tests automatisés, déploiement continu ; Python, FastAPI, PostgreSQL, Docker.</p>
+          </li>
+          <li>
+            <div class="row"><h3>Application de backtesting</h3><span class="when">nov. 2025 – fév. 2026</span></div>
+            <p class="where">Collaboration MindPlug</p>
+            <p>Générateurs de données de marché (Heston, CIR) et pipeline de lecture des fichiers binaires de marché pour le moteur de backtest. C#, .NET, Python.</p>
+          </li>
+          <li>
+            <div class="row"><h3>Développeur web et données, stage</h3><span class="when">juin – nov. 2025</span></div>
+            <p class="where">Le Travailleur · Montreuil</p>
+            <p>Logiciel de gestion des stocks en temps réel (Django/Dash, PostgreSQL) et site web de l'entreprise.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= QCM ================= -->
+    <section id="qcm" aria-labelledby="qcm-titre">
+      <div class="container">
+        <div class="card qcm">
+          <div>
+            <p class="eyebrow">Révision</p>
+            <h2 id="qcm-titre">QCM : produits dérivés et gestion de portefeuille</h2>
+            <p style="margin:0;color:var(--text-2)">40 questions (en anglais), deux modes : examen, avec le score et la correction à la fin, ou apprentissage, avec la correction après chaque réponse.</p>
+          </div>
+          <a class="btn btn-primary" href="qcm/">Lancer le QCM</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Formation ================= -->
+    <section id="formation" aria-labelledby="formation-titre">
+      <div class="container">
+        <div class="section-head"><h2 id="formation-titre">Formation et plus</h2></div>
+        <div class="two-col">
+          <ol class="timeline">
+            <li>
+              <div class="row"><h3>Diplôme d'ingénieur, Informatique pour la Finance</h3><span class="when">2024 – 2026</span></div>
+              <p class="where">EFREI Paris</p>
+              <p>Finance de marché, mathématiques appliquées, produits dérivés, valorisation d'options.</p>
+            </li>
+            <li>
+              <div class="row"><h3>Cycle préparatoire intégré</h3><span class="when">2021 – 2024</span></div>
+              <p class="where">EFREI Paris · semestre international à la VSB – TU Ostrava (République tchèque, 2023–2024)</p>
+            </li>
+          </ol>
+          <ol class="timeline">
+            <li>
+              <div class="row"><h3>Langues</h3></div>
+              <p>Français (langue maternelle) · anglais courant (TOEIC 895)</p>
+            </li>
+            <li>
+              <div class="row"><h3>Formateur informatique bénévole</h3><span class="when">depuis 2026</span></div>
+              <p class="where">Armée du Salut</p>
+              <p>Cours hebdomadaires pour des femmes hébergées dans un foyer.</p>
+            </li>
+            <li>
+              <div class="row"><h3>Formateur informatique bénévole</h3><span class="when">pendant mes études</span></div>
+              <p class="where">FAP EFREI</p>
+              <p>Initiation à l'informatique pour des seniors.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© 2026 Adam Guemoune · <a href="mailto:adam.guemoune@proton.me">adam.guemoune@proton.me</a></span>
+      <span>Site statique, <a href="https://github.com/AdamYv/AdamYv.github.io">code source sur GitHub</a></span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
