@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modèles de Markov cachés – détection de régimes | Adam Guemoune</title>
+  <meta name="description" content="Modèle de Markov caché gaussien codé à la main en Python et Numba : Forward-Backward, Baum-Welch, Viterbi, évalué sur des séries simulées à régimes connus.">
+  <link rel="canonical" href="https://adamyv.github.io/projets/hmm.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://adamyv.github.io/projets/hmm.html">
+  <meta property="og:title" content="Modèles de Markov cachés – Adam Guemoune">
+  <meta property="og:description" content="Modèle de Markov caché gaussien codé à la main en Python et Numba : Forward-Backward, Baum-Welch, Viterbi, évalué sur des séries simulées à régimes connus.">
+  <meta property="og:image" content="https://adamyv.github.io/assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232160b0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../">adam.guemoune</a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="../#projets">Projets</a>
+        <a href="https://github.com/AdamYv/HMM">Code</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Changer de thème">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <div class="container page-head">
+      <p class="breadcrumb"><a href="../#projets">← Projets</a></p>
+      <p class="eyebrow">Projet personnel · Python · Numba · mars 2026</p>
+      <h1>Modèles de Markov cachés</h1>
+      <p style="color:var(--text-2);max-width:65ch;font-size:1.05rem">Un HMM à émissions gaussiennes écrit sans bibliothèque de HMM, pour retrouver des régimes cachés à partir de la seule série observée.</p>
+      <div class="cta"><a class="btn" href="https://github.com/AdamYv/HMM">Voir le code sur GitHub</a></div>
+    </div>
+
+    <section>
+      <div class="container prose">
+        <h2>Le problème</h2>
+        <p>Un marché alterne entre des phases (calme, tendance, forte volatilité) qu'on n'observe pas directement : on ne voit que la série des prix ou des rendements. Un modèle de Markov caché suppose que ces régimes suivent une chaîne de Markov et que chaque régime produit des observations selon sa propre loi.</p>
+
+        <h2>Implémentation</h2>
+        <ul>
+          <li><strong>Forward-Backward</strong> pour les probabilités de chaque régime à chaque date.</li>
+          <li><strong>Baum-Welch</strong> (algorithme EM) pour apprendre sans supervision la matrice de transition, la distribution initiale et les paramètres gaussiens de chaque régime.</li>
+          <li><strong>Viterbi</strong> pour la séquence de régimes la plus probable.</li>
+          <li>Les boucles critiques sont compilées avec <strong>Numba</strong> ; le code est découpé en modules (modèle, émissions, simulation, évaluation, visualisation).</li>
+        </ul>
+
+        <h2>Évaluation</h2>
+        <p>Le modèle est testé sur des séries simulées à 3 régimes connus (une sinusoïde, une sigmoïde et une constante, chacune bruitée), avec une matrice de transition persistante. Les régimes estimés sont appariés aux vrais par l'algorithme hongrois, puis on mesure la part de dates correctement classées.</p>
+      </div>
+      <div class="container" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));max-width:1000px">
+        <figure>
+          <img src="../assets/img/hmm-convergence.webp" width="1000" height="600" loading="lazy" alt="Log-vraisemblance au fil des itérations de Baum-Welch : le cas à bruit faible converge en une dizaine d'itérations vers environ moins 1300, le cas à bruit fort plafonne vers moins 1880.">
+          <figcaption>Convergence de Baum-Welch : la log-vraisemblance croît à chaque itération, plus vite et plus haut quand le bruit est faible.</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/img/hmm-heatmap.webp" width="800" height="600" loading="lazy" alt="Carte de chaleur de la précision du décodage selon l'amplitude du sinus (0,5 à 4) et la variance du bruit (0,1 à 2) : les valeurs vont de 0,27 à 0,54.">
+          <figcaption>Précision du décodage selon l'amplitude du signal et la variance du bruit : de 27 % à 54 %.</figcaption>
+        </figure>
+      </div>
+      <div class="container prose">
+        <h2>Résultats, honnêtement</h2>
+        <p>L'algorithme converge, mais la précision du décodage reste modeste : entre 27 % et 54 % selon les paramètres, à comparer à environ 33 % pour un tirage au hasard parmi 3 régimes. La raison tient à la simulation elle-même : la moyenne de deux régimes varie dans le temps (sinusoïde, sigmoïde), alors que le HMM suppose une moyenne constante par régime, et la sinusoïde comme la constante ont une moyenne proche de zéro. Le modèle ne peut alors les distinguer que par leur variance.</p>
+
+        <h2>Ce que j'en retire</h2>
+        <p>Écrire Baum-Welch et Viterbi à la main, puis mesurer quand le décodage échoue, apprend les limites du modèle autant que son fonctionnement : un HMM n'est bon que si ses hypothèses d'émission collent aux données.</p>
+
+        <h2>Pistes</h2>
+        <ul>
+          <li>Simuler des régimes conformes aux hypothèses (moyenne et variance constantes par régime) pour valider l'implémentation seule.</li>
+          <li>Appliquer le modèle aux rendements réels (AMZN, BNP Paribas) et comparer les régimes détectés aux périodes de stress connues.</li>
+          <li>Utiliser des émissions plus riches (mélanges de gaussiennes, Student) pour les queues épaisses des rendements.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© 2026 Adam Guemoune · <a href="mailto:adam.guemoune@proton.me">adam.guemoune@proton.me</a></span>
+      <span><a href="../">Retour au portfolio</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

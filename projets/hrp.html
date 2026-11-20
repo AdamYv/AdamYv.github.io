@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HRP vs Markowitz – backtest hors échantillon | Adam Guemoune</title>
+  <meta name="description" content="Hierarchical Risk Parity (López de Prado) comparé à Markowitz par un backtest walk-forward hors échantillon sur 2016-2025 : méthode, résultats et limites.">
+  <link rel="canonical" href="https://adamyv.github.io/projets/hrp.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://adamyv.github.io/projets/hrp.html">
+  <meta property="og:title" content="HRP vs Markowitz – Adam Guemoune">
+  <meta property="og:description" content="Hierarchical Risk Parity (López de Prado) comparé à Markowitz par un backtest walk-forward hors échantillon sur 2016-2025 : méthode, résultats et limites.">
+  <meta property="og:image" content="https://adamyv.github.io/assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232160b0'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../">adam.guemoune</a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="../#projets">Projets</a>
+        <a href="https://github.com/AdamYv/Hierarchical-Clustering-Asset">Code</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Changer de thème">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <div class="container page-head">
+      <p class="breadcrumb"><a href="../#projets">← Projets</a></p>
+      <p class="eyebrow">Projet personnel · Python · sept.–nov. 2025, backtest ajouté en novembre 2026</p>
+      <h1>Hierarchical Risk Parity vs Markowitz</h1>
+      <p style="color:var(--text-2);max-width:65ch;font-size:1.05rem">Un framework d'allocation d'actifs par clustering hiérarchique, avec une implémentation de HRP et un backtest hors échantillon face à Markowitz.</p>
+      <div class="cta"><a class="btn" href="https://github.com/AdamYv/Hierarchical-Clustering-Asset">Voir le code sur GitHub</a></div>
+    </div>
+
+    <section>
+      <div class="container prose">
+        <h2>Le problème</h2>
+        <p>L'optimisation de Markowitz inverse la matrice de covariance des rendements. Estimée sur des données bruitées, cette matrice est mal conditionnée : de petites erreurs d'estimation produisent des poids instables, souvent concentrés sur quelques actifs. Hierarchical Risk Parity (López de Prado, 2016) évite cette inversion en s'appuyant sur la structure hiérarchique des corrélations.</p>
+
+        <h2>Méthode</h2>
+        <ul>
+          <li><strong>Distance de corrélation</strong> entre actifs, puis clustering hiérarchique (single linkage).
+            <p class="formula"><var>d</var><sub><var>ij</var></sub> = √((1 − ρ<sub><var>ij</var></sub>) / 2)</p></li>
+          <li><strong>Quasi-diagonalisation</strong> : les actifs sont réordonnés selon les feuilles du dendrogramme, ce qui regroupe les actifs corrélés le long de la diagonale de la covariance.</li>
+          <li><strong>Bissection récursive</strong> : à chaque coupure, le budget est réparti entre les deux sous-groupes en proportion inverse de leur variance.
+            <p class="formula">α = 1 − σ²<sub>gauche</sub> / (σ²<sub>gauche</sub> + σ²<sub>droite</sub>)</p></li>
+          <li><strong>Références Markowitz</strong> (long-only, somme des poids = 1, SLSQP) : variance minimale et Sharpe maximal ; plus l'équipondéré 1/N.</li>
+          <li><strong>Backtest walk-forward</strong> : à chaque rebalancement, les poids sont estimés uniquement sur les 252 jours de bourse précédents, puis conservés 21 jours. Aucune donnée future n'est utilisée (vérifié par un test), pas de frais, taux sans risque nul. Prix ajustés Yahoo Finance.</li>
+        </ul>
+
+        <h2>Résultats</h2>
+        <p>12 actifs (actions, obligations, or, pétrole, immobilier, marchés internationaux et émergents), backtest du 5 janvier 2016 au 31 octobre 2025.</p>
+      </div>
+      <div class="container">
+        <div class="table-wrap" style="max-width:820px">
+          <table>
+            <caption class="visually-hidden">Performance hors échantillon des stratégies d'allocation, 2016-2025</caption>
+            <thead><tr><th scope="col">Stratégie</th><th scope="col">Rendement annualisé</th><th scope="col">Volatilité</th><th scope="col">Sharpe</th><th scope="col">Drawdown max</th></tr></thead>
+            <tbody>
+              <tr><td>HRP</td><td class="best">5,10 %</td><td>6,32 %</td><td class="best">0,82</td><td>−17,9 %</td></tr>
+              <tr><td>Markowitz variance min.</td><td>3,05 %</td><td>5,18 %</td><td>0,61</td><td>−16,5 %</td></tr>
+              <tr><td>Markowitz Sharpe max.</td><td>4,48 %</td><td>14,09 %</td><td>0,38</td><td>−34,8 %</td></tr>
+              <tr><td>Équipondéré 1/N</td><td>13,60 %</td><td>13,24 %</td><td>1,03</td><td>−26,7 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure style="max-width:820px">
+          <img src="../assets/img/hrp-backtest.webp" width="1200" height="600" loading="lazy" alt="Courbe de valeur hors échantillon de 2016 à 2025 : le 1/N termine vers 3,5, HRP vers 1,6, Markowitz Sharpe maximal vers 1,5 et Markowitz variance minimale vers 1,35.">
+          <figcaption>Valeur d'un portefeuille de 1 investi en janvier 2016 (hors échantillon). Les valeurs exactes sont dans le dépôt (results/).</figcaption>
+        </figure>
+      </div>
+      <div class="container prose">
+        <ul>
+          <li>Face à Markowitz, HRP gagne <strong>+2,05 points de rendement annualisé</strong> contre la variance minimale et <strong>+0,63 point</strong> contre le Sharpe maximal, avec le meilleur Sharpe des trois et un drawdown deux fois plus faible que le Sharpe maximal.</li>
+          <li>Le simple 1/N fait mieux que les trois sur cette période. HRP et la variance minimale, qui réduisent le risque, placent en moyenne 62 % et 87 % du portefeuille sur l'ETF obligataire AGG, peu rémunérateur sur la période, alors que le 1/N garde 25 % en actions technologiques.</li>
+          <li>Le classement dépend de l'univers : sur un portefeuille de 8 valeurs technologiques, Markowitz Sharpe maximal dépasse HRP (48,5 % contre 31,2 % par an).</li>
+        </ul>
+
+        <h2>Ce que j'en retire</h2>
+        <p>Un protocole propre (estimation glissante, pas de biais d'anticipation, tests unitaires) compte plus que le chiffre final. HRP tient sa promesse de stabilité face à Markowitz, mais une allocation naïve peut gagner sur une période donnée, et le résultat change avec l'univers d'actifs.</p>
+
+        <h2>Limites et pistes</h2>
+        <ul>
+          <li>Pas de frais de transaction ni de contrainte de rotation : le Sharpe maximal, qui change souvent de poids, serait davantage pénalisé.</li>
+          <li>Une seule fenêtre d'estimation (252 jours) et une seule fréquence de rebalancement : une étude de sensibilité serait utile.</li>
+          <li>Covariance empirique : un estimateur à rétrécissement (Ledoit-Wolf) améliorerait probablement Markowitz.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© 2026 Adam Guemoune · <a href="mailto:adam.guemoune@proton.me">adam.guemoune@proton.me</a></span>
+      <span><a href="../">Retour au portfolio</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
