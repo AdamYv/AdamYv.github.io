@@ -3,9 +3,9 @@
 // injectée en HTML : tout passe par textContent.
 (function () {
   // URL publique de l'API, sans « / » final (ex. "https://papers.exemple.fr").
-  // Vide tant que l'API n'est pas déployée. Côté serveur, il faut
-  // QFIN_CORS_ORIGINS=https://adamyv.github.io.
-  var API_BASE = "";
+  // Seul GET /api/v1/digest est public ; le serveur n'autorise que l'origine
+  // https://adamyv.github.io.
+  var API_BASE = "https://adam-dell-home.tail0d4f16.ts.net:10000";
 
   // En local uniquement, ?api=http://127.0.0.1:5000 permet de tester.
   var isLocal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
@@ -52,6 +52,12 @@
     return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   }
 
+  // Certaines revues donnent la date du numéro à venir : ces papiers sont
+  // placés en fin de liste avec la mention « à paraître ».
+  var now = new Date();
+  var today = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2);
+  function isUpcoming(p) { return String(p.published || "").slice(0, 10) > today; }
+
   function showStatus(text) {
     status.textContent = text;
     status.hidden = false;
@@ -75,7 +81,7 @@
 
     var meta = el("p", "paper-meta");
     var date = formatDate(p.published);
-    if (date) meta.appendChild(el("span", null, date));
+    if (date) meta.appendChild(el("span", null, isUpcoming(p) ? "À paraître (" + date + ")" : date));
     if (p.source) meta.appendChild(el("span", null, p.source));
     li.appendChild(meta);
 
@@ -168,6 +174,8 @@
       papers = (data && Array.isArray(data.items) ? data.items : []).filter(function (p) {
         return p && typeof p.title === "string" && p.title;
       });
+      papers = papers.filter(function (p) { return !isUpcoming(p); })
+        .concat(papers.filter(isUpcoming).reverse());
       if (!papers.length) {
         showStatus("Aucun nouveau papier ces 7 derniers jours.");
         return;
